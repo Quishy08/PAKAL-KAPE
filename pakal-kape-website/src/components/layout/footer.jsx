@@ -19,7 +19,9 @@ const Footer = ({ scrollTo }) => {
               <span className="text-3xl font-bold block group-hover:text-amber-400 transition-colors">
                 PAKAL KAPE
               </span>
-              <span className="text-sm text-amber-400">Escudo del Café</span>
+              <span className="text-sm text-amber-400">
+                Eslogan que quiera el ram
+              </span>
             </div>
           </button>
 

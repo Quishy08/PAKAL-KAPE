@@ -3,7 +3,7 @@
  * @param {string} product - Nombre del producto o mensaje
  * @param {string} phoneNumber - Número de teléfono (opcional)
  */
-export const sendWhatsAppMessage = (product, phoneNumber = "") => {
+export const sendWhatsAppMessage = (product, phoneNumber = "+522212764387") => {
   const message = encodeURIComponent(
     `Hola! Me interesa ${product} de Pakal Kape. ¿Podrían darme más información?`
   );
