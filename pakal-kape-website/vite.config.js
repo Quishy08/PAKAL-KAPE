@@ -3,5 +3,5 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
-  base: "/PAKAL-KAPE/", // Debe coincidir EXACTAMENTE con el nombre de tu repo
+  base: "/", // Debe coincidir EXACTAMENTE con el nombre de tu repo
 });

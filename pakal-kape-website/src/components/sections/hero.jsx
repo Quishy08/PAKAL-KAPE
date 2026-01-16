@@ -40,7 +40,7 @@ const Hero = ({ scrollTo }) => {
           <div className="flex items-center justify-center space-x-4 mb-8">
             <div className="h-px w-20 bg-gradient-to-r from-transparent to-amber-400" />
             <p className="text-3xl md:text-5xl text-amber-300 italic font-light">
-              Escudo del Café
+              Eslogan que quieraq el ram
             </p>
             <div className="h-px w-20 bg-gradient-to-l from-transparent to-amber-400" />
           </div>
