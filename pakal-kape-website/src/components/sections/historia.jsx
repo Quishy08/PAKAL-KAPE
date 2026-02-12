@@ -1,6 +1,6 @@
 import { Star } from "lucide-react";
 import { caracteristicas, fundadores } from "../../data/content";
-import cafeImage from "../../assets/finca_cafe.jpg";
+import cafeImage from "../../assets/logo_pakal.jpeg";
 
 const Historia = ({ visibleSections }) => {
   const isVisible = visibleSections.historia;

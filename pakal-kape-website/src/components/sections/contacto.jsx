@@ -1,4 +1,11 @@
-import { MessageCircle, Mountain, Sparkles } from "lucide-react";
+import {
+  MessageCircle,
+  Mountain,
+  Sparkles,
+  Mail,
+  Instagram,
+  Facebook,
+} from "lucide-react";
 import { contactInfo } from "../../data/content";
 import { sendWhatsAppMessage } from "../../utils/whatsapp";
 
@@ -8,11 +15,11 @@ const Contacto = ({ visibleSections }) => {
   return (
     <section
       id="contacto"
-      className={`py-32 px-4 bg-gradient-to-br from-stone-900 via-amber-900 to-stone-900 text-white relative overflow-hidden transition-opacity duration-1000 ${
-        isVisible ? "section-visible" : "section-enter"
-      }`}
+      className={
+        "py-32 px-4 bg-gradient-to-br from-stone-900 via-amber-900 to-stone-900 text-white relative overflow-hidden transition-opacity duration-1000 " +
+        (isVisible ? "section-visible" : "section-enter")
+      }
     >
-      {/* Background Pattern */}
       <div
         className="absolute inset-0 opacity-5 anim-rotate"
         aria-hidden="true"
@@ -28,11 +35,11 @@ const Contacto = ({ visibleSections }) => {
       </div>
 
       <div
-        className={`max-w-5xl mx-auto text-center relative z-10 ${
-          isVisible ? "anim-scale" : "opacity-0"
-        }`}
+        className={
+          "max-w-5xl mx-auto text-center relative z-10 " +
+          (isVisible ? "anim-scale" : "opacity-0")
+        }
       >
-        {/* Header */}
         <header className="mb-16">
           <h2 className="text-6xl md:text-8xl font-bold mb-12">Contáctanos</h2>
           <div className="flex items-center justify-center space-x-4 mb-16">
@@ -40,7 +47,6 @@ const Contacto = ({ visibleSections }) => {
           </div>
         </header>
 
-        {/* Content */}
         <div className="space-y-12">
           <p className="text-3xl md:text-4xl font-light leading-relaxed">
             ¿Interesado en nuestros productos de café de especialidad?
@@ -50,22 +56,63 @@ const Contacto = ({ visibleSections }) => {
             chocolate artesanal
           </p>
 
-          {/* WhatsApp Button */}
-          <button
-            onClick={() =>
-              sendWhatsAppMessage(
-                "información sobre productos",
-                contactInfo.phoneNumber
-              )
-            }
-            className="group bg-green-600 hover:bg-green-700 text-white px-16 py-6 rounded-full text-2xl font-bold transition-all transform hover:scale-110 shadow-2xl shadow-green-600/50 hover:shadow-green-600/80 flex items-center justify-center space-x-4 mx-auto"
-            aria-label="Enviar mensaje por WhatsApp"
-          >
-            <MessageCircle className="w-8 h-8 group-hover:rotate-12 transition-transform" />
-            <span>Chatear por WhatsApp</span>
-          </button>
+          <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto mt-12">
+            <button
+              onClick={() =>
+                sendWhatsAppMessage(
+                  "información sobre productos",
+                  contactInfo.phoneNumber,
+                )
+              }
+              className="group bg-green-600 hover:bg-green-700 text-white px-8 py-6 rounded-2xl text-lg font-bold transition-all transform hover:scale-105 shadow-2xl flex items-center justify-center space-x-3"
+              aria-label="Enviar mensaje por WhatsApp"
+            >
+              <MessageCircle className="w-7 h-7 group-hover:rotate-12 transition-transform" />
+              <div className="text-left">
+                <div className="text-sm opacity-90">WhatsApp</div>
+                <div className="text-lg">{contactInfo.phoneNumber}</div>
+              </div>
+            </button>
 
-          {/* Contact Info */}
+            <a
+              href={"mailto:" + contactInfo.email}
+              className="group bg-amber-600 hover:bg-amber-700 text-white px-8 py-6 rounded-2xl text-lg font-bold transition-all transform hover:scale-105 shadow-2xl flex items-center justify-center space-x-3"
+              aria-label="Enviar correo electrónico"
+            >
+              <Mail className="w-7 h-7 group-hover:rotate-12 transition-transform" />
+              <div className="text-left">
+                <div className="text-sm opacity-90">Email</div>
+                <div className="text-lg">{contactInfo.email}</div>
+              </div>
+            </a>
+          </div>
+
+          <div className="mt-16 pt-12 border-t border-white/20">
+            <p className="text-xl text-amber-300 mb-6">
+              Síguenos en redes sociales
+            </p>
+            <div className="flex justify-center space-x-6">
+              <a
+                href={contactInfo.social.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group bg-white/10 hover:bg-gradient-to-br hover:from-purple-600 hover:to-pink-600 p-4 rounded-full transition-all transform hover:scale-110"
+                aria-label="Instagram"
+              >
+                <Instagram className="w-8 h-8" />
+              </a>
+              <a
+                href={contactInfo.social.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group bg-white/10 hover:bg-blue-600 p-4 rounded-full transition-all transform hover:scale-110"
+                aria-label="Facebook"
+              >
+                <Facebook className="w-8 h-8" />
+              </a>
+            </div>
+          </div>
+
           <div className="mt-20 pt-12 border-t border-white/20 space-y-6">
             <div className="flex items-center justify-center space-x-3 mb-4">
               <Sparkles className="w-6 h-6 text-amber-400" />

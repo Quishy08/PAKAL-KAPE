@@ -1,5 +1,5 @@
-import { Coffee, Star } from "lucide-react";
-import { navItems } from "../../data/content";
+import { Star } from "lucide-react";
+import { navItems, brandInfo } from "../../data/content";
 
 const Footer = ({ scrollTo }) => {
   const currentYear = new Date().getFullYear();
@@ -14,13 +14,17 @@ const Footer = ({ scrollTo }) => {
             className="flex items-center justify-center space-x-3 group mx-auto"
             aria-label="Ir a inicio"
           >
-            <Coffee className="w-10 h-10 text-amber-500 group-hover:rotate-12 transition-transform" />
-            <div>
+            <img
+              src={brandInfo.logo}
+              alt="Pakal Kape Logo"
+              className="h-16 w-auto group-hover:scale-110 transition-transform"
+            />
+            <div className="text-left">
               <span className="text-3xl font-bold block group-hover:text-amber-400 transition-colors">
-                PAKAL KAPE
+                {brandInfo.name}
               </span>
               <span className="text-sm text-amber-400">
-                Eslogan que quiera el ram
+                {brandInfo.tagline}
               </span>
             </div>
           </button>
@@ -38,8 +42,7 @@ const Footer = ({ scrollTo }) => {
 
           {/* Description */}
           <p className="text-stone-400 text-lg max-w-2xl mx-auto">
-            Café 100% orgánico de especialidad cultivado en las montañas de
-            Chiapas, México
+            {brandInfo.description}
           </p>
 
           {/* Navigation Links */}

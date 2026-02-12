@@ -1,5 +1,14 @@
 import { Coffee, Leaf, Mountain, Star, Award } from "lucide-react";
 
+// Información de la marca
+export const brandInfo = {
+  name: "PAKAL KAPE",
+  tagline: "COMPROMISO CON EL ORIGEN, PASIÓN POR EL CAFÉ",
+  description:
+    "Café de especialidad 100% orgánico de las montañas de Chiapas, México",
+  logo: "/logo.svg", // o la ruta correcta de tu logo
+};
+
 export const navItems = [
   { id: "historia", label: "Historia" },
   { id: "productos", label: "Productos" },
@@ -130,5 +139,10 @@ export const procesosData = [
 export const contactInfo = {
   location: "Jaltenango, Chiapas, México",
   fundadores: "Valeria Jarquín & Ramses Guzmán",
-  phoneNumber: "", // Agregar número de WhatsApp aquí cuando lo tengas
+  phoneNumber: "+522212764387",
+  email: "contacto@pakalkape.com",
+  social: {
+    instagram: "https://instagram.com/pakalkape", // Actualiza con tu usuario real
+    facebook: "https://www.facebook.com/profile.php?id=61586843253028",
+  },
 };
