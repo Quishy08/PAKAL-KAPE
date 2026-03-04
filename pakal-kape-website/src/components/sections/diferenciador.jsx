@@ -5,20 +5,20 @@ const Diferenciador = ({ visibleSections }) => {
 
   return (
     <section
-      className={`py-32 px-4 bg-gradient-to-br from-stone-900 via-amber-900 to-stone-900 text-white relative overflow-hidden transition-opacity duration-1000 ${
-        isVisible ? "section-visible" : "section-enter"
-      }`}
+      className={
+        "py-32 px-4 bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white relative overflow-hidden transition-opacity duration-1000 " +
+        (isVisible ? "section-visible" : "section-enter")
+      }
     >
-      {/* Background Stars */}
       <div className="absolute inset-0 opacity-5" aria-hidden="true">
         {[...Array(20)].map((_, i) => (
           <div
             key={i}
             className="absolute anim-float"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
+              left: Math.random() * 100 + "%",
+              top: Math.random() * 100 + "%",
+              animationDelay: Math.random() * 3 + "s",
             }}
           >
             <Star className="w-4 h-4 text-white" />
@@ -27,22 +27,22 @@ const Diferenciador = ({ visibleSections }) => {
       </div>
 
       <div
-        className={`max-w-6xl mx-auto text-center relative z-10 ${
-          isVisible ? "anim-scale" : "opacity-0"
-        }`}
+        className={
+          "max-w-6xl mx-auto text-center relative z-10 " +
+          (isVisible ? "anim-scale" : "opacity-0")
+        }
       >
-        <h2 className="text-5xl md:text-7xl font-bold mb-16">
-          ¿Qué Hace Este Café <span className="text-amber-400">Diferente?</span>
+        <h2 className="font-display text-5xl md:text-7xl font-bold mb-16">
+          ¿Qué Hace Este Café <span className="text-green-400">Diferente?</span>
         </h2>
-
         <div className="relative">
           <div
-            className="absolute -inset-8 bg-gradient-to-r from-amber-600/20 via-orange-500/20 to-amber-600/20 rounded-full filter blur-3xl"
+            className="absolute -inset-8 bg-gradient-to-r from-green-600/20 via-amber-500/20 to-green-600/20 rounded-full filter blur-3xl"
             aria-hidden="true"
           />
-          <p className="relative text-3xl md:text-4xl leading-relaxed font-light px-8">
+          <p className="relative font-body text-2xl md:text-3xl leading-relaxed px-8 text-gray-100">
             Nuestro café es una{" "}
-            <span className="text-amber-300 font-bold">
+            <span className="text-green-400 font-bold">
               expresión auténtica
             </span>
             , ya que cuidamos y supervisamos minuciosamente cada etapa del
@@ -51,7 +51,6 @@ const Diferenciador = ({ visibleSections }) => {
             identidades.
           </p>
         </div>
-
         <div
           className="mt-12 flex justify-center space-x-3"
           role="img"
@@ -60,8 +59,8 @@ const Diferenciador = ({ visibleSections }) => {
           {[...Array(5)].map((_, i) => (
             <Star
               key={i}
-              className="w-10 h-10 text-amber-400 fill-amber-400 anim-pulse"
-              style={{ animationDelay: `${i * 0.15}s` }}
+              className="w-10 h-10 text-green-500 fill-green-500 anim-pulse"
+              style={{ animationDelay: i * 0.15 + "s" }}
             />
           ))}
         </div>

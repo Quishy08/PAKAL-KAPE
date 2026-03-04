@@ -1,6 +1,6 @@
-import { Star } from "lucide-react";
+import { Star, Coffee } from "lucide-react";
 import { caracteristicas, fundadores } from "../../data/content";
-import cafeImage from "../../assets/logo_pakal.jpeg";
+import cafeImage from "../../assets/finca_mejorada.jpg";
 
 const Historia = ({ visibleSections }) => {
   const isVisible = visibleSections.historia;
@@ -8,72 +8,69 @@ const Historia = ({ visibleSections }) => {
   return (
     <section
       id="historia"
-      className={`py-32 px-4 bg-gradient-to-b from-white to-amber-50/30 relative overflow-hidden transition-opacity duration-1000 ${
-        isVisible ? "section-visible" : "section-enter"
-      }`}
+      className={
+        "py-32 px-4 bg-gradient-to-b from-stone-50 to-white relative overflow-hidden transition-opacity duration-1000 " +
+        (isVisible ? "section-visible" : "section-enter")
+      }
     >
-      {/* Background Effects */}
       <div
-        className="absolute top-0 right-0 w-[600px] h-[600px] bg-amber-200 rounded-full filter blur-3xl opacity-10 anim-pulse"
+        className="absolute top-0 right-0 w-[600px] h-[600px] bg-green-100 rounded-full filter blur-3xl opacity-30 anim-pulse"
         aria-hidden="true"
       />
       <div
-        className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-green-200 rounded-full filter blur-3xl opacity-10 anim-pulse"
+        className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-amber-100 rounded-full filter blur-3xl opacity-30 anim-pulse"
         style={{ animationDelay: "1s" }}
         aria-hidden="true"
       />
 
       <div className="max-w-7xl mx-auto relative z-10">
-        {/* Section Header */}
         <header
-          className={`text-center mb-20 ${
-            isVisible ? "anim-slide-down" : "opacity-0"
-          }`}
+          className={
+            "text-center mb-20 " + (isVisible ? "anim-slide-down" : "opacity-0")
+          }
         >
-          <h2 className="text-6xl md:text-8xl font-bold text-stone-900 mb-8">
+          <h2 className="font-display text-6xl md:text-8xl font-bold text-gray-900 mb-8">
             Nuestra Historia
           </h2>
           <div className="flex items-center justify-center space-x-4 mb-6">
-            <div className="h-1 w-32 bg-gradient-to-r from-transparent via-amber-600 to-transparent" />
+            <div className="h-1 w-32 bg-gradient-to-r from-transparent via-green-600 to-transparent" />
           </div>
         </header>
 
         <div className="max-w-5xl mx-auto space-y-20">
-          {/* Introduction + Image */}
           <article
-            className={`${isVisible ? "anim-slide-up" : "opacity-0"}`}
+            className={'${isVisible ? "anim-slide-up" : "opacity-0"}'}
             style={{ animationDelay: "0.2s" }}
           >
-            <p className="text-2xl md:text-3xl text-stone-700 leading-relaxed text-center mb-12 font-light">
+            <p className="font-body text-2xl md:text-3xl text-gray-700 leading-relaxed text-center mb-12">
               Café Pakal Kape nace de la idea de poder crear una marca de café
               en la cual se llegue a{" "}
-              <strong className="text-amber-700 font-semibold">
+              <strong className="text-green-700 font-bold">
                 dignificar y valorar el trabajo de nuestros productores
               </strong>
               , ya que ellos son la base para poder obtener el mejor café con la
               mejor calidad.
             </p>
 
-            <figure className="relative w-full h-[400px] md:h-[600px] rounded-3xl overflow-hidden shadow-2xl group">
+            <figure className="relative w-full h-[400px] md:h-[600px] rounded-3xl overflow-hidden shadow-2xl group border-4 border-green-600">
               <img
                 src={cafeImage}
                 alt="Plantación de café Pakal Kape en las montañas de Chiapas"
                 className="w-full h-full object-cover"
                 loading="lazy"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-stone-900/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             </figure>
           </article>
 
-          {/* Second Paragraph */}
           <div
-            className={`${isVisible ? "anim-slide-right" : "opacity-0"}`}
+            className={'${isVisible ? "anim-slide-right" : "opacity-0"}'}
             style={{ animationDelay: "0.4s" }}
           >
-            <p className="text-2xl md:text-3xl text-stone-700 leading-relaxed font-light">
+            <p className="font-body text-2xl md:text-3xl text-gray-700 leading-relaxed">
               Mediante los diversos procesos de secado y fermentación que
               realizan, hacen que cada grano de café obtenga un{" "}
-              <strong className="text-green-700 font-semibold">
+              <strong className="text-amber-700 font-bold">
                 sabor excepcional y único
               </strong>
               . Es por eso que en Pakal Kape, como nuestro nombre lo indica, nos
@@ -82,11 +79,11 @@ const Historia = ({ visibleSections }) => {
             </p>
           </div>
 
-          {/* Features Grid */}
           <div
-            className={`grid md:grid-cols-4 gap-8 mt-20 ${
-              isVisible ? "anim-scale" : "opacity-0"
-            }`}
+            className={
+              "grid md:grid-cols-4 gap-8 mt-20 " +
+              (isVisible ? "anim-scale" : "opacity-0")
+            }
             style={{ animationDelay: "0.6s" }}
           >
             {caracteristicas.map((item, i) => {
@@ -94,54 +91,58 @@ const Historia = ({ visibleSections }) => {
               return (
                 <article
                   key={i}
-                  className="group text-center transform hover:scale-110 transition-all duration-500"
-                  style={{ animationDelay: `${0.8 + i * 0.1}s` }}
+                  className="group text-center transform hover:scale-110 transition-all duration-500 bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl border-2 border-gray-200 hover:border-green-500"
                 >
                   <div
-                    className={`${item.bg} w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:shadow-2xl transition-all`}
+                    className={
+                      "w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:shadow-2xl transition-all " +
+                      item.bg
+                    }
                   >
                     <IconComponent
-                      className={`w-12 h-12 ${item.color} group-hover:scale-125 transition-transform`}
+                      className={
+                        "w-12 h-12 group-hover:scale-125 transition-transform " +
+                        item.color
+                      }
                     />
                   </div>
-                  <h3 className="text-xl font-bold text-stone-900 mb-2">
+                  <h3 className="font-heading text-xl font-bold text-gray-900 mb-2">
                     {item.title}
                   </h3>
-                  <p className="text-stone-600">{item.desc}</p>
+                  <p className="font-body text-gray-600">{item.desc}</p>
                 </article>
               );
             })}
           </div>
 
-          {/* Founders Section */}
           <section
-            className={`mt-32 ${isVisible ? "anim-slide-up" : "opacity-0"}`}
+            className={"mt-32 " + (isVisible ? "anim-slide-up" : "opacity-0")}
             style={{ animationDelay: "1s" }}
           >
             <header className="text-center mb-16">
-              <h3 className="text-5xl md:text-6xl font-bold text-stone-900 mb-4">
+              <h3 className="font-display text-5xl md:text-6xl font-bold text-gray-900 mb-4">
                 Fundadores
               </h3>
-              <p className="text-xl text-stone-600">
+              <p className="font-body text-xl text-gray-600">
                 Visionarios del café de especialidad
               </p>
             </header>
 
             <div className="grid md:grid-cols-2 gap-16 max-w-4xl mx-auto">
               {fundadores.map((fundador, i) => (
-                <article key={i} className="group text-center">
-                  <figure className="relative w-48 h-48 md:w-64 md:h-64 mx-auto mb-6 rounded-full overflow-hidden shadow-2xl transform group-hover:scale-110 transition-all duration-500">
-                    <img
-                      src={fundador.imagen}
-                      alt={`${fundador.nombre}, ${fundador.rol} de Pakal Kape`}
-                      className="w-full h-full object-cover"
-                      loading="lazy"
-                    />
+                <article
+                  key={i}
+                  className="group text-center bg-gradient-to-b from-green-50 to-white p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all"
+                >
+                  <figure className="relative w-48 h-48 md:w-64 md:h-64 mx-auto mb-6 rounded-full overflow-hidden shadow-2xl transform group-hover:scale-110 transition-all duration-500 ring-8 ring-green-500/50">
+                    <div className="w-full h-full bg-gradient-to-br from-gray-700 via-gray-800 to-gray-900 flex items-center justify-center">
+                      <Coffee className="w-20 h-20 text-white/40" />
+                    </div>
                   </figure>
-                  <h4 className="text-3xl font-bold text-stone-900 mb-2">
+                  <h4 className="font-heading text-3xl font-bold text-gray-900 mb-2">
                     {fundador.nombre}
                   </h4>
-                  <p className="text-amber-700 text-lg font-semibold mb-3">
+                  <p className="font-body text-green-700 text-lg font-semibold mb-3">
                     {fundador.rol}
                   </p>
                   <div
@@ -152,7 +153,7 @@ const Historia = ({ visibleSections }) => {
                     {[...Array(5)].map((_, j) => (
                       <Star
                         key={j}
-                        className="w-5 h-5 text-amber-400 fill-amber-400"
+                        className="w-5 h-5 text-green-600 fill-green-600"
                       />
                     ))}
                   </div>

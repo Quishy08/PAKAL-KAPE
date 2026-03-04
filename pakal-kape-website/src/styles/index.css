@@ -1,5 +1,8 @@
-@import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap");
+
 @import "./animations.css";
+
+@import "tailwindcss";
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
@@ -7,14 +10,14 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #1c1917;
+  background: #1a1a1a;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #d97706;
+  background: #5d826a;
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #b45309;
+  background: #4a6855;
 }

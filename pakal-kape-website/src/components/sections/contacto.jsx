@@ -16,7 +16,7 @@ const Contacto = ({ visibleSections }) => {
     <section
       id="contacto"
       className={
-        "py-32 px-4 bg-gradient-to-br from-stone-900 via-amber-900 to-stone-900 text-white relative overflow-hidden transition-opacity duration-1000 " +
+        "py-32 px-4 bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white relative overflow-hidden transition-opacity duration-1000 " +
         (isVisible ? "section-visible" : "section-enter")
       }
     >
@@ -41,17 +41,19 @@ const Contacto = ({ visibleSections }) => {
         }
       >
         <header className="mb-16">
-          <h2 className="text-6xl md:text-8xl font-bold mb-12">Contáctanos</h2>
+          <h2 className="font-display text-6xl md:text-8xl font-bold mb-12">
+            Contáctanos
+          </h2>
           <div className="flex items-center justify-center space-x-4 mb-16">
-            <div className="h-1 w-32 bg-gradient-to-r from-transparent via-amber-400 to-transparent" />
+            <div className="h-1 w-32 bg-gradient-to-r from-transparent via-green-500 to-transparent" />
           </div>
         </header>
 
         <div className="space-y-12">
-          <p className="text-3xl md:text-4xl font-light leading-relaxed">
+          <p className="font-body text-3xl md:text-4xl font-light leading-relaxed">
             ¿Interesado en nuestros productos de café de especialidad?
           </p>
-          <p className="text-2xl text-amber-300 font-light">
+          <p className="font-body text-2xl text-green-400 font-light">
             Contáctanos para más información sobre nuestros cafés Geisha y
             chocolate artesanal
           </p>
@@ -64,8 +66,7 @@ const Contacto = ({ visibleSections }) => {
                   contactInfo.phoneNumber,
                 )
               }
-              className="group bg-green-600 hover:bg-green-700 text-white px-8 py-6 rounded-2xl text-lg font-bold transition-all transform hover:scale-105 shadow-2xl flex items-center justify-center space-x-3"
-              aria-label="Enviar mensaje por WhatsApp"
+              className="group bg-green-600 hover:bg-green-700 text-white px-8 py-6 rounded-2xl text-lg font-bold transition-all transform hover:scale-105 shadow-2xl flex items-center justify-center space-x-3 font-heading"
             >
               <MessageCircle className="w-7 h-7 group-hover:rotate-12 transition-transform" />
               <div className="text-left">
@@ -76,8 +77,7 @@ const Contacto = ({ visibleSections }) => {
 
             <a
               href={"mailto:" + contactInfo.email}
-              className="group bg-amber-600 hover:bg-amber-700 text-white px-8 py-6 rounded-2xl text-lg font-bold transition-all transform hover:scale-105 shadow-2xl flex items-center justify-center space-x-3"
-              aria-label="Enviar correo electrónico"
+              className="group bg-amber-700 hover:bg-amber-800 text-white px-8 py-6 rounded-2xl text-lg font-bold transition-all transform hover:scale-105 shadow-2xl flex items-center justify-center space-x-3 font-heading"
             >
               <Mail className="w-7 h-7 group-hover:rotate-12 transition-transform" />
               <div className="text-left">
@@ -88,7 +88,7 @@ const Contacto = ({ visibleSections }) => {
           </div>
 
           <div className="mt-16 pt-12 border-t border-white/20">
-            <p className="text-xl text-amber-300 mb-6">
+            <p className="font-body text-xl text-green-400 mb-6">
               Síguenos en redes sociales
             </p>
             <div className="flex justify-center space-x-6">
@@ -97,7 +97,6 @@ const Contacto = ({ visibleSections }) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group bg-white/10 hover:bg-gradient-to-br hover:from-purple-600 hover:to-pink-600 p-4 rounded-full transition-all transform hover:scale-110"
-                aria-label="Instagram"
               >
                 <Instagram className="w-8 h-8" />
               </a>
@@ -106,7 +105,6 @@ const Contacto = ({ visibleSections }) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group bg-white/10 hover:bg-blue-600 p-4 rounded-full transition-all transform hover:scale-110"
-                aria-label="Facebook"
               >
                 <Facebook className="w-8 h-8" />
               </a>
@@ -115,14 +113,16 @@ const Contacto = ({ visibleSections }) => {
 
           <div className="mt-20 pt-12 border-t border-white/20 space-y-6">
             <div className="flex items-center justify-center space-x-3 mb-4">
-              <Sparkles className="w-6 h-6 text-amber-400" />
-              <p className="text-amber-400 text-2xl font-semibold">
+              <Sparkles className="w-6 h-6 text-green-500" />
+              <p className="font-heading text-green-500 text-2xl font-semibold">
                 Fundadores
               </p>
-              <Sparkles className="w-6 h-6 text-amber-400" />
+              <Sparkles className="w-6 h-6 text-green-500" />
             </div>
-            <p className="text-3xl font-bold">{contactInfo.fundadores}</p>
-            <p className="text-xl text-stone-300 flex items-center justify-center space-x-2">
+            <p className="font-heading text-3xl font-bold">
+              {contactInfo.fundadores}
+            </p>
+            <p className="font-body text-xl text-gray-300 flex items-center justify-center space-x-2">
               <Mountain className="w-5 h-5" />
               <span>{contactInfo.location}</span>
             </p>

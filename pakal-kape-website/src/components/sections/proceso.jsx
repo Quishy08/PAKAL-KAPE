@@ -6,18 +6,18 @@ const Proceso = ({ visibleSections }) => {
   return (
     <section
       id="proceso"
-      className={`py-32 px-4 bg-gradient-to-b from-white to-stone-100 transition-opacity duration-1000 ${
-        isVisible ? "section-visible" : "section-enter"
-      }`}
+      className={
+        "py-32 px-4 bg-gradient-to-b from-stone-50 to-white transition-opacity duration-1000 " +
+        (isVisible ? "section-visible" : "section-enter")
+      }
     >
       <div className="max-w-7xl mx-auto">
-        {/* Section Header */}
         <header
-          className={`text-center mb-24 ${
-            isVisible ? "anim-slide-down" : "opacity-0"
-          }`}
+          className={
+            "text-center mb-24 " + (isVisible ? "anim-slide-down" : "opacity-0")
+          }
         >
-          <h2 className="text-6xl md:text-8xl font-bold text-stone-900 mb-8">
+          <h2 className="font-display text-6xl md:text-8xl font-bold text-gray-900 mb-8">
             Nuestro Proceso
           </h2>
           <div className="flex items-center justify-center space-x-4">
@@ -25,7 +25,6 @@ const Proceso = ({ visibleSections }) => {
           </div>
         </header>
 
-        {/* Process Steps */}
         <div className="space-y-32">
           {procesosData.map((step, i) => {
             const IconComponent = step.icon;
@@ -35,41 +34,52 @@ const Proceso = ({ visibleSections }) => {
             return (
               <article
                 key={i}
-                className={`flex flex-col ${
-                  step.position === "right"
+                className={
+                  "flex flex-col " +
+                  (step.position === "right"
                     ? "lg:flex-row-reverse"
-                    : "lg:flex-row"
-                } items-center gap-16 ${
-                  isVisible ? animationClass : "opacity-0"
-                }`}
+                    : "lg:flex-row") +
+                  " items-center gap-16 " +
+                  (isVisible ? animationClass : "opacity-0")
+                }
                 style={{ animationDelay: step.delay }}
               >
-                {/* Icon Circle */}
                 <div className="lg:w-1/2">
                   <div className="relative group">
                     <div
-                      className={`absolute inset-0 bg-gradient-to-br ${step.gradient} rounded-full filter blur-3xl opacity-20 group-hover:opacity-40 transition-opacity`}
+                      className={
+                        "absolute inset-0 bg-gradient-to-br " +
+                        step.gradient +
+                        " rounded-full filter blur-3xl opacity-30 group-hover:opacity-50 transition-opacity"
+                      }
                       aria-hidden="true"
                     />
                     <div
-                      className={`relative w-72 h-72 mx-auto bg-gradient-to-br ${step.gradient} rounded-full flex items-center justify-center shadow-2xl group-hover:shadow-3xl transition-all transform group-hover:scale-110 group-hover:rotate-6`}
+                      className={
+                        "relative w-72 h-72 mx-auto bg-gradient-to-br " +
+                        step.gradient +
+                        " rounded-full flex items-center justify-center shadow-2xl group-hover:shadow-3xl transition-all transform group-hover:scale-110"
+                      }
                     >
                       <IconComponent className="w-36 h-36 text-white group-hover:scale-110 transition-transform" />
                     </div>
                   </div>
                 </div>
 
-                {/* Content */}
                 <div className="lg:w-1/2 space-y-6">
-                  <h3 className="text-5xl md:text-6xl font-bold text-stone-900">
+                  <h3 className="font-display text-5xl md:text-6xl font-bold text-gray-900">
                     {step.title}
                   </h3>
                   <p
-                    className={`text-3xl font-semibold bg-gradient-to-r ${step.gradient} bg-clip-text text-transparent`}
+                    className={
+                      "font-heading text-3xl font-semibold bg-gradient-to-r " +
+                      step.gradient +
+                      " bg-clip-text text-transparent"
+                    }
                   >
                     {step.subtitle}
                   </p>
-                  <p className="text-xl md:text-2xl text-stone-600 leading-relaxed font-light">
+                  <p className="font-body text-xl md:text-2xl text-gray-700 leading-relaxed">
                     {step.description}
                   </p>
                 </div>

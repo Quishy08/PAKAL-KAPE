@@ -1,12 +1,11 @@
 import { Coffee, Leaf, Mountain, Star, Award } from "lucide-react";
 
-// Información de la marca
 export const brandInfo = {
   name: "PAKAL KAPE",
-  tagline: "COMPROMISO CON EL ORIGEN, PASIÓN POR EL CAFÉ",
+  tagline: "Compromiso con el origen, pasión por el café",
   description:
     "Café de especialidad 100% orgánico de las montañas de Chiapas, México",
-  logo: "/logo.svg", // o la ruta correcta de tu logo
+  logo: "/logo.svg",
 };
 
 export const navItems = [
@@ -20,29 +19,29 @@ export const caracteristicas = [
     icon: Coffee,
     title: "Calidad Premium",
     desc: "Café de especialidad 100%",
-    color: "text-amber-600",
-    bg: "bg-amber-50",
+    color: "text-amber-700",
+    bg: "bg-amber-100",
   },
   {
     icon: Leaf,
     title: "100% Orgánico",
     desc: "Certificado orgánico",
-    color: "text-green-600",
-    bg: "bg-green-50",
+    color: "text-green-700",
+    bg: "bg-green-100",
   },
   {
     icon: Mountain,
     title: "Gran Altura",
     desc: "1600-1900 msnm",
-    color: "text-blue-600",
-    bg: "bg-blue-50",
+    color: "text-blue-700",
+    bg: "bg-blue-100",
   },
   {
     icon: Star,
     title: "Variedad Geisha",
     desc: "Sabor excepcional",
-    color: "text-purple-600",
-    bg: "bg-purple-50",
+    color: "text-purple-700",
+    bg: "bg-purple-100",
   },
 ];
 
@@ -100,7 +99,7 @@ export const procesosData = [
     description:
       "Nuestro café proviene de las montañas de Chiapas, cultivado entre 1600 y 1900 metros sobre el nivel del mar, donde las condiciones perfectas de altitud y clima dan vida a granos excepcionales.",
     icon: Mountain,
-    gradient: "from-blue-400 to-blue-600",
+    gradient: "from-blue-600 to-blue-800",
     position: "left",
     delay: "0.2s",
   },
@@ -110,7 +109,7 @@ export const procesosData = [
     description:
       "Nuestro café cuenta con certificación orgánica, garantizando que cada grano se cultiva sin pesticidas ni químicos, respetando la tierra y el medio ambiente.",
     icon: Award,
-    gradient: "from-green-400 to-green-600",
+    gradient: "from-green-600 to-green-800",
     position: "right",
     delay: "0.4s",
   },
@@ -120,7 +119,7 @@ export const procesosData = [
     description:
       "Trabajamos con la prestigiosa variedad Geisha, reconocida mundialmente por su perfil de sabor único, notas florales y complejidad excepcional.",
     icon: Star,
-    gradient: "from-purple-400 to-purple-600",
+    gradient: "from-purple-600 to-purple-800",
     position: "left",
     delay: "0.6s",
   },
@@ -130,7 +129,7 @@ export const procesosData = [
     description:
       "Aplicamos un tostado simple que realza las características naturales del grano, preservando sus sabores originales y su perfil aromático único.",
     icon: Coffee,
-    gradient: "from-amber-400 to-amber-600",
+    gradient: "from-amber-600 to-amber-800",
     position: "right",
     delay: "0.8s",
   },
@@ -142,7 +141,7 @@ export const contactInfo = {
   phoneNumber: "+522212764387",
   email: "contacto@pakalkape.com",
   social: {
-    instagram: "https://instagram.com/pakalkape", // Actualiza con tu usuario real
-    facebook: "https://www.facebook.com/profile.php?id=61586843253028",
+    instagram: "https://instagram.com/pakalkape",
+    facebook: "https://facebook.com/pakalkape",
   },
 };

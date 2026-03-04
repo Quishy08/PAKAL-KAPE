@@ -1,5 +1,6 @@
-import { Coffee, Menu, X } from "lucide-react";
-import { navItems } from "../../data/content";
+import { Menu, X, Coffee } from "lucide-react";
+import { navItems, brandInfo } from "../../data/content";
+import logo from "../../assets/logo_pakal.jpeg";
 
 const Navbar = ({
   scrolled,
@@ -10,31 +11,27 @@ const Navbar = ({
 }) => {
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? "bg-stone-900/95 backdrop-blur-md shadow-2xl py-3"
-          : "bg-gradient-to-b from-black/60 to-transparent py-4"
-      }`}
+      className={
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-500 " +
+        (scrolled
+          ? "bg-gray-900/95 backdrop-blur-md shadow-2xl py-3"
+          : "bg-gradient-to-b from-black/60 to-transparent py-4")
+      }
     >
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex justify-between items-center">
-          {/* Logo */}
           <button
             onClick={() => scrollTo("inicio")}
             className="flex items-center space-x-3 group"
             aria-label="Ir a inicio"
           >
-            <Coffee
-              className={`w-8 h-8 transition-all ${
-                scrolled ? "text-amber-500" : "text-white"
-              } group-hover:rotate-12`}
-            />
-            <span className="text-xl font-bold text-white group-hover:text-amber-400 transition-colors">
-              PAKAL KAPE
+            <Coffee className="h-8 w-8 text-white transition-transform group-hover:scale-110" />
+
+            <span className="text-xl font-heading font-bold text-white group-hover:text-green-400 transition-colors hidden sm:block">
+              {brandInfo.name}
             </span>
           </button>
 
-          {/* Desktop Navigation */}
           <nav
             className="hidden md:flex space-x-8"
             aria-label="Navegación principal"
@@ -43,16 +40,18 @@ const Navbar = ({
               <button
                 key={item.id}
                 onClick={() => scrollTo(item.id)}
-                className={`text-white hover:text-amber-400 transition-all font-medium ${
-                  activeSection === item.id ? "text-amber-400" : ""
-                }`}
+                className={
+                  "font-heading font-medium transition-all " +
+                  (activeSection === item.id
+                    ? "text-green-400"
+                    : "text-white hover:text-green-300")
+                }
               >
                 {item.label}
               </button>
             ))}
           </nav>
 
-          {/* Mobile Menu Button */}
           <button
             className="md:hidden text-white p-2 hover:bg-white/10 rounded-lg transition-all"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -68,15 +67,14 @@ const Navbar = ({
         </div>
       </div>
 
-      {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-stone-900/98 backdrop-blur-lg border-t border-stone-700">
+        <div className="md:hidden bg-gray-900/98 backdrop-blur-lg border-t border-gray-700">
           <nav className="px-4 py-4 space-y-1" aria-label="Navegación móvil">
             {navItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => scrollTo(item.id)}
-                className="block w-full text-left px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-all"
+                className="block w-full text-left px-4 py-3 rounded-lg text-white hover:bg-white/10 transition-all font-heading"
               >
                 {item.label}
               </button>
