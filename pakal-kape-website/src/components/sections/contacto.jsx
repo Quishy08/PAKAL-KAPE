@@ -16,7 +16,7 @@ const Contacto = ({ visibleSections }) => {
     <section
       id="contacto"
       className={
-        "py-32 px-4 bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white relative overflow-hidden transition-opacity duration-1000 " +
+        "py-16 sm:py-24 lg:py-32 px-4 bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white relative overflow-hidden transition-opacity duration-1000 " +
         (isVisible ? "section-visible" : "section-enter")
       }
     >
@@ -41,7 +41,7 @@ const Contacto = ({ visibleSections }) => {
         }
       >
         <header className="mb-16">
-          <h2 className="font-display text-6xl md:text-8xl font-bold mb-12">
+          <h2 className="font-display text-4xl sm:text-6xl md:text-8xl font-bold mb-8 sm:mb-12">
             Contáctanos
           </h2>
           <div className="flex items-center justify-center space-x-4 mb-16">
@@ -50,12 +50,11 @@ const Contacto = ({ visibleSections }) => {
         </header>
 
         <div className="space-y-12">
-          <p className="font-body text-3xl md:text-4xl font-light leading-relaxed">
+          <p className="font-body text-xl sm:text-3xl md:text-4xl font-light leading-relaxed">
             ¿Interesado en nuestros productos de café de especialidad?
           </p>
-          <p className="font-body text-2xl text-green-400 font-light">
-            Contáctanos para más información sobre nuestros cafés Geisha y
-            chocolate artesanal
+          <p className="font-body text-base sm:text-xl md:text-2xl text-green-400 font-light">
+            Contáctanos para más información sobre nuestros cafés Geisha
           </p>
 
           <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto mt-12">
@@ -66,7 +65,7 @@ const Contacto = ({ visibleSections }) => {
                   contactInfo.phoneNumber,
                 )
               }
-              className="group bg-green-600 hover:bg-green-700 text-white px-8 py-6 rounded-2xl text-lg font-bold transition-all transform hover:scale-105 shadow-2xl flex items-center justify-center space-x-3 font-heading"
+              className="group bg-green-600 hover:bg-green-700 text-white px-6 sm:px-8 py-4 sm:py-6 rounded-2xl text-base sm:text-lg font-bold transition-all transform hover:scale-105 shadow-2xl flex items-center justify-center space-x-3 font-heading"
             >
               <MessageCircle className="w-7 h-7 group-hover:rotate-12 transition-transform" />
               <div className="text-left">
@@ -77,12 +76,12 @@ const Contacto = ({ visibleSections }) => {
 
             <a
               href={"mailto:" + contactInfo.email}
-              className="group bg-amber-700 hover:bg-amber-800 text-white px-8 py-6 rounded-2xl text-lg font-bold transition-all transform hover:scale-105 shadow-2xl flex items-center justify-center space-x-3 font-heading"
+              className="group bg-amber-700 hover:bg-amber-800 text-white px-6 sm:px-8 py-4 sm:py-6 rounded-2xl text-base sm:text-lg font-bold transition-all transform hover:scale-105 shadow-2xl flex items-center justify-center space-x-3 font-heading min-w-0"
             >
               <Mail className="w-7 h-7 group-hover:rotate-12 transition-transform" />
               <div className="text-left">
                 <div className="text-sm opacity-90">Email</div>
-                <div className="text-lg">{contactInfo.email}</div>
+                <div className="text-sm sm:text-lg break-all">{contactInfo.email}</div>
               </div>
             </a>
           </div>
@@ -119,7 +118,7 @@ const Contacto = ({ visibleSections }) => {
               </p>
               <Sparkles className="w-6 h-6 text-green-500" />
             </div>
-            <p className="font-heading text-3xl font-bold">
+            <p className="font-heading text-xl sm:text-3xl font-bold">
               {contactInfo.fundadores}
             </p>
             <p className="font-body text-xl text-gray-300 flex items-center justify-center space-x-2">

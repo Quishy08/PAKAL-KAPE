@@ -32,42 +32,42 @@ const Hero = ({ scrollTo }) => {
 
       <div className="relative z-10 text-center px-4 max-w-6xl mx-auto">
         <div className="anim-fade">
-          <div className="mb-8 bg-green-900/20 backdrop-blur-sm p-8 rounded-3xl inline-block border-2 border-green-600">
+          <div className="mb-6 bg-green-900/20 backdrop-blur-sm p-4 sm:p-8 rounded-3xl inline-block border-2 border-green-600">
             <img
               src={logo}
               alt="Pakal Kape"
-              className="h-128 md:h-100 w-auto mx-auto"
+              className="h-40 sm:h-56 md:h-72 w-auto mx-auto"
             />
           </div>
 
-          <h1 className="font-display text-6xl md:text-8xl lg:text-9xl font-bold text-white mb-6 tracking-tight drop-shadow-2xl">
+          <h1 className="font-display text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-bold text-white mb-4 sm:mb-6 tracking-tight drop-shadow-2xl">
             {brandInfo.name}
           </h1>
 
-          <div className="flex items-center justify-center space-x-4 mb-8">
-            <div className="h-px w-20 bg-gradient-to-r from-transparent to-green-500" />
-            <p className="font-heading text-xl md:text-2xl text-green-400 font-medium tracking-widest uppercase">
+          <div className="flex items-center justify-center space-x-2 sm:space-x-4 mb-6 sm:mb-8 px-2">
+            <div className="h-px w-10 sm:w-20 bg-gradient-to-r from-transparent to-green-500 flex-shrink-0" />
+            <p className="font-heading text-sm sm:text-lg md:text-2xl text-green-400 font-medium tracking-wider uppercase text-center">
               {brandInfo.tagline}
             </p>
-            <div className="h-px w-20 bg-gradient-to-l from-transparent to-green-500" />
+            <div className="h-px w-10 sm:w-20 bg-gradient-to-l from-transparent to-green-500 flex-shrink-0" />
           </div>
 
-          <p className="font-body text-lg md:text-xl text-gray-200 max-w-4xl mx-auto mb-16 leading-relaxed">
+          <p className="font-body text-base sm:text-lg md:text-xl text-gray-200 max-w-4xl mx-auto mb-10 sm:mb-16 leading-relaxed px-2">
             {brandInfo.description}
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center px-4 sm:px-0">
             <button
               onClick={() => scrollTo("productos")}
-              className="group bg-green-600 hover:bg-green-700 text-white px-12 py-5 rounded-full font-heading text-lg font-semibold transition-all transform hover:scale-110 shadow-2xl shadow-green-600/50 flex items-center justify-center space-x-3"
+              className="group bg-green-600 hover:bg-green-700 text-white px-8 sm:px-12 py-4 sm:py-5 rounded-full font-heading text-base sm:text-lg font-semibold transition-all transform hover:scale-110 shadow-2xl shadow-green-600/50 flex items-center justify-center space-x-3"
             >
               <span>Explorar Productos</span>
-              <Coffee className="w-6 h-6 group-hover:rotate-12 transition-transform" />
+              <Coffee className="w-5 h-5 sm:w-6 sm:h-6 group-hover:rotate-12 transition-transform" />
             </button>
 
             <button
               onClick={() => scrollTo("historia")}
-              className="bg-amber-700 hover:bg-amber-800 text-white px-12 py-5 rounded-full font-heading text-lg font-semibold transition-all transform hover:scale-110 border-2 border-amber-600 shadow-xl"
+              className="bg-amber-700 hover:bg-amber-800 text-white px-8 sm:px-12 py-4 sm:py-5 rounded-full font-heading text-base sm:text-lg font-semibold transition-all transform hover:scale-110 border-2 border-amber-600 shadow-xl"
             >
               Nuestra Historia
             </button>

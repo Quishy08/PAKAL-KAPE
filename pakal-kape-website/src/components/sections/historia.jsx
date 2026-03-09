@@ -9,7 +9,7 @@ const Historia = ({ visibleSections }) => {
     <section
       id="historia"
       className={
-        "py-32 px-4 bg-gradient-to-b from-stone-50 to-white relative overflow-hidden transition-opacity duration-1000 " +
+        "py-16 sm:py-24 lg:py-32 px-4 bg-gradient-to-b from-stone-50 to-white relative overflow-hidden transition-opacity duration-1000 " +
         (isVisible ? "section-visible" : "section-enter")
       }
     >
@@ -29,7 +29,7 @@ const Historia = ({ visibleSections }) => {
             "text-center mb-20 " + (isVisible ? "anim-slide-down" : "opacity-0")
           }
         >
-          <h2 className="font-display text-6xl md:text-8xl font-bold text-gray-900 mb-8">
+          <h2 className="font-display text-4xl sm:text-6xl md:text-8xl font-bold text-gray-900 mb-6 sm:mb-8">
             Nuestra Historia
           </h2>
           <div className="flex items-center justify-center space-x-4 mb-6">
@@ -42,7 +42,7 @@ const Historia = ({ visibleSections }) => {
             className={'${isVisible ? "anim-slide-up" : "opacity-0"}'}
             style={{ animationDelay: "0.2s" }}
           >
-            <p className="font-body text-2xl md:text-3xl text-gray-700 leading-relaxed text-center mb-12">
+            <p className="font-body text-lg sm:text-2xl md:text-3xl text-gray-700 leading-relaxed text-center mb-8 sm:mb-12">
               Café Pakal Kape nace de la idea de poder crear una marca de café
               en la cual se llegue a{" "}
               <strong className="text-green-700 font-bold">
@@ -67,7 +67,7 @@ const Historia = ({ visibleSections }) => {
             className={'${isVisible ? "anim-slide-right" : "opacity-0"}'}
             style={{ animationDelay: "0.4s" }}
           >
-            <p className="font-body text-2xl md:text-3xl text-gray-700 leading-relaxed">
+            <p className="font-body text-lg sm:text-2xl md:text-3xl text-gray-700 leading-relaxed">
               Mediante los diversos procesos de secado y fermentación que
               realizan, hacen que cada grano de café obtenga un{" "}
               <strong className="text-amber-700 font-bold">
@@ -120,7 +120,7 @@ const Historia = ({ visibleSections }) => {
             style={{ animationDelay: "1s" }}
           >
             <header className="text-center mb-16">
-              <h3 className="font-display text-5xl md:text-6xl font-bold text-gray-900 mb-4">
+              <h3 className="font-display text-3xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-4">
                 Fundadores
               </h3>
               <p className="font-body text-xl text-gray-600">
@@ -134,12 +134,12 @@ const Historia = ({ visibleSections }) => {
                   key={i}
                   className="group text-center bg-gradient-to-b from-green-50 to-white p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all"
                 >
-                  <figure className="relative w-48 h-48 md:w-64 md:h-64 mx-auto mb-6 rounded-full overflow-hidden shadow-2xl transform group-hover:scale-110 transition-all duration-500 ring-8 ring-green-500/50">
+                  <figure className="relative w-36 h-36 sm:w-48 sm:h-48 md:w-64 md:h-64 mx-auto mb-6 rounded-full overflow-hidden shadow-2xl transform group-hover:scale-110 transition-all duration-500 ring-4 sm:ring-8 ring-green-500/50">
                     <div className="w-full h-full bg-gradient-to-br from-gray-700 via-gray-800 to-gray-900 flex items-center justify-center">
                       <Coffee className="w-20 h-20 text-white/40" />
                     </div>
                   </figure>
-                  <h4 className="font-heading text-3xl font-bold text-gray-900 mb-2">
+                  <h4 className="font-heading text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
                     {fundador.nombre}
                   </h4>
                   <p className="font-body text-green-700 text-lg font-semibold mb-3">

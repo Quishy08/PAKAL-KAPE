@@ -6,7 +6,7 @@ const Diferenciador = ({ visibleSections }) => {
   return (
     <section
       className={
-        "py-32 px-4 bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white relative overflow-hidden transition-opacity duration-1000 " +
+        "py-16 sm:py-24 lg:py-32 px-4 bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white relative overflow-hidden transition-opacity duration-1000 " +
         (isVisible ? "section-visible" : "section-enter")
       }
     >
@@ -32,7 +32,7 @@ const Diferenciador = ({ visibleSections }) => {
           (isVisible ? "anim-scale" : "opacity-0")
         }
       >
-        <h2 className="font-display text-5xl md:text-7xl font-bold mb-16">
+        <h2 className="font-display text-3xl sm:text-5xl md:text-7xl font-bold mb-8 sm:mb-16">
           ¿Qué Hace Este Café <span className="text-green-400">Diferente?</span>
         </h2>
         <div className="relative">
@@ -40,7 +40,7 @@ const Diferenciador = ({ visibleSections }) => {
             className="absolute -inset-8 bg-gradient-to-r from-green-600/20 via-amber-500/20 to-green-600/20 rounded-full filter blur-3xl"
             aria-hidden="true"
           />
-          <p className="relative font-body text-2xl md:text-3xl leading-relaxed px-8 text-gray-100">
+          <p className="relative font-body text-base sm:text-xl md:text-3xl leading-relaxed px-4 sm:px-8 text-gray-100">
             Nuestro café es una{" "}
             <span className="text-green-400 font-bold">
               expresión auténtica

@@ -44,7 +44,7 @@ const Footer = ({ scrollTo }) => {
           </p>
 
           <nav
-            className="flex justify-center space-x-8 text-gray-400 font-heading"
+            className="flex flex-wrap justify-center gap-x-6 gap-y-3 sm:gap-x-8 text-gray-400 font-heading"
             aria-label="Enlaces de navegación"
           >
             {navItems.map((item) => (
