@@ -25,37 +25,6 @@ Sitio web oficial de **Pakal Kape**, marca de café de especialidad 100% orgáni
 
 ---
 
-## Estructura del Proyecto
-
-```
-pakal-kape-website/
-├── index.html                  # Entry point + SEO meta + JSON-LD
-├── src/
-│   ├── main.jsx
-│   ├── App.jsx                 # Root layout + scroll progress bar
-│   ├── index.css               # Global styles + Tailwind imports
-│   ├── assets/                 # Logo, product images
-│   ├── components/
-│   │   ├── layout/
-│   │   │   ├── navbar.jsx      # Fixed nav with scroll spy + mobile menu
-│   │   │   └── footer.jsx      # Footer with nav links + copyright
-│   │   └── sections/
-│   │       ├── hero.jsx        # Landing screen with animations
-│   │       ├── historia.jsx    # Brand story + stats
-│   │       ├── diferenciador.jsx
-│   │       ├── productos.jsx   # Product cards with image carousel
-│   │       ├── proceso.jsx     # Production process steps
-│   │       └── contacto.jsx    # WhatsApp + email + social links
-│   ├── data/
-│   │   └── content.js          # All text content, product data, nav items
-│   ├── hooks/
-│   │   └── useScrollSpy.js     # Active section detection on scroll
-│   └── utils/
-│       └── whatsapp.js         # WhatsApp deep link generator
-```
-
----
-
 ## Productos
 
 ### YUUMIL BAK'AL — Café en Grano Tostado
@@ -78,35 +47,6 @@ pakal-kape-website/
 - **Tipografía:** Playfair Display (display) · Montserrat (headings) · Inter (body)
 - **Animaciones:** Framer Motion — parallax, letter-by-letter flip, scroll progress bar, stagger FadeUp, hover interactions
 - **SEO:** JSON-LD structured data (LocalBusiness + Product), Open Graph, Twitter Card, meta description y keywords
-
----
-
-## Comandos
-
-```bash
-# Instalar dependencias
-npm install
-
-# Servidor de desarrollo
-npm run dev
-
-# Build de producción
-npm run build
-
-# Preview del build
-npm run preview
-```
-
----
-
-## SEO & Google Search Console
-
-El sitio incluye:
-- `<title>` y `<meta name="description">` optimizados
-- Open Graph tags para compartir en redes sociales
-- Twitter Card tags
-- JSON-LD con `@type: LocalBusiness` y `@type: Product` para resultados enriquecidos en Google
-- `<link rel="canonical">` apuntando a `https://pakalkape.com`
 
 ---
 
