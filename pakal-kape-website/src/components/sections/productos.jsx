@@ -1,5 +1,12 @@
-import { useState } from "react";
-import { MessageCircle, ChevronLeft, ChevronRight } from "lucide-react";
+import { useState, useRef } from "react";
+import {
+  motion,
+  useInView,
+  useMotionValue,
+  useTransform,
+  AnimatePresence,
+} from "framer-motion";
+import { ChevronLeft, ChevronRight, MessageCircle } from "lucide-react";
 import { productos } from "../../data/content";
 import { sendWhatsAppMessage } from "../../utils/whatsapp";
 
@@ -8,85 +15,84 @@ const imageModules = import.meta.glob("../../assets/*.{jpg,jpeg,png,webp}", {
 });
 
 const resolveImage = (path) => {
-  // path comes as "/src/assets/filename.jpg" → key is "../../assets/filename.jpg"
   const filename = path.split("/").pop();
-  const key = "../../assets/" + filename;
-  return imageModules[key]?.default ?? null;
+  return imageModules["../../assets/" + filename]?.default ?? null;
 };
 
+/* ── Animated slide carousel ─────────────────────────── */
 const Carousel = ({ imagenes, nombre, IconComponent }) => {
-  const [current, setCurrent] = useState(0);
+  const [[current, dir], setState] = useState([0, 0]);
   const total = imagenes.length;
 
-  const prev = () => setCurrent((c) => (c - 1 + total) % total);
-  const next = () => setCurrent((c) => (c + 1) % total);
+  const paginate = (d) =>
+    setState(([c]) => [(c + d + total) % total, d]);
+
+  const variants = {
+    enter: (d) => ({ x: d > 0 ? "100%" : "-100%", opacity: 0, scale: 0.97 }),
+    center: { x: 0, opacity: 1, scale: 1 },
+    exit: (d) => ({ x: d > 0 ? "-35%" : "35%", opacity: 0, scale: 0.97 }),
+  };
 
   return (
-    <div className="relative w-full h-full select-none">
-      {imagenes.map((src, i) => (
-        <div
-          key={i}
-          className={
-            "absolute inset-0 transition-opacity duration-500 " +
-            (i === current ? "opacity-100 z-10" : "opacity-0 z-0")
-          }
+    <div className="relative w-full h-full select-none bg-[#111] overflow-hidden">
+      <AnimatePresence initial={false} custom={dir} mode="sync">
+        <motion.div
+          key={current}
+          custom={dir}
+          variants={variants}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+          className="absolute inset-0"
         >
-          <img
-            src={resolveImage(src) ?? src}
-            alt={nombre + " — imagen " + (i + 1)}
-            className="w-full h-full object-cover"
-            onError={(e) => {
-              e.currentTarget.style.display = "none";
-              e.currentTarget.nextSibling.style.display = "flex";
-            }}
-          />
-          <div
-            className="w-full h-full bg-gradient-to-br from-amber-900 via-stone-800 to-black items-center justify-center"
-            style={{ display: "none" }}
-          >
-            <div className="text-center text-white/50">
-              <IconComponent className="w-20 h-20 mx-auto mb-3" />
-              <p className="text-base">Pakal Kape</p>
-            </div>
-          </div>
-        </div>
-      ))}
-
-      {/* Fallback if no images loaded yet */}
-      <div className="absolute inset-0 bg-gradient-to-br from-amber-900 via-stone-800 to-black flex items-center justify-center z-0">
-        <div className="text-center text-white/30">
-          <IconComponent className="w-20 h-20 mx-auto mb-3" />
-          <p className="text-base">Pakal Kape</p>
-        </div>
-      </div>
+          {(() => {
+            const resolved = resolveImage(imagenes[current]);
+            return resolved ? (
+              <img
+                src={resolved}
+                alt={nombre + " " + (current + 1)}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center">
+                <IconComponent className="w-12 h-12 text-white/10" />
+              </div>
+            );
+          })()}
+        </motion.div>
+      </AnimatePresence>
 
       {/* Arrows */}
-      <button
-        onClick={prev}
-        className="absolute left-3 top-1/2 -translate-y-1/2 z-30 bg-black/40 hover:bg-black/70 text-white rounded-full p-2 transition-all"
+      <motion.button
+        onClick={() => paginate(-1)}
+        whileHover={{ scale: 1.15, backgroundColor: "rgba(0,0,0,0.85)" }}
+        whileTap={{ scale: 0.9 }}
+        className="absolute left-3 top-1/2 -translate-y-1/2 z-30 w-9 h-9 flex items-center justify-center bg-black/55 text-white"
         aria-label="Imagen anterior"
       >
-        <ChevronLeft className="w-5 h-5" />
-      </button>
-      <button
-        onClick={next}
-        className="absolute right-3 top-1/2 -translate-y-1/2 z-30 bg-black/40 hover:bg-black/70 text-white rounded-full p-2 transition-all"
+        <ChevronLeft className="w-4 h-4" />
+      </motion.button>
+      <motion.button
+        onClick={() => paginate(1)}
+        whileHover={{ scale: 1.15, backgroundColor: "rgba(0,0,0,0.85)" }}
+        whileTap={{ scale: 0.9 }}
+        className="absolute right-3 top-1/2 -translate-y-1/2 z-30 w-9 h-9 flex items-center justify-center bg-black/55 text-white"
         aria-label="Siguiente imagen"
       >
-        <ChevronRight className="w-5 h-5" />
-      </button>
+        <ChevronRight className="w-4 h-4" />
+      </motion.button>
 
       {/* Dots */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 flex space-x-2">
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 flex gap-1.5">
         {imagenes.map((_, i) => (
-          <button
+          <motion.button
             key={i}
-            onClick={() => setCurrent(i)}
-            className={
-              "w-2.5 h-2.5 rounded-full transition-all " +
-              (i === current ? "bg-white scale-125" : "bg-white/50")
-            }
-            aria-label={"Ir a imagen " + (i + 1)}
+            onClick={() => setState([i, i > current ? 1 : -1])}
+            animate={{ width: i === current ? 20 : 6, backgroundColor: i === current ? "#c9a96e" : "rgba(255,255,255,0.3)" }}
+            transition={{ duration: 0.3 }}
+            className="h-1 rounded-full"
+            aria-label={"Imagen " + (i + 1)}
           />
         ))}
       </div>
@@ -94,142 +100,265 @@ const Carousel = ({ imagenes, nombre, IconComponent }) => {
   );
 };
 
-const Productos = ({ visibleSections }) => {
-  const isVisible = visibleSections.productos;
+/* ── 3D tilt card ────────────────────────────────────── */
+const TiltCard = ({ children, className = "" }) => {
+  const ref = useRef(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const rotateX = useTransform(y, [-0.5, 0.5], [8, -8]);
+  const rotateY = useTransform(x, [-0.5, 0.5], [-8, 8]);
+
+  const handleMouseMove = (e) => {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    x.set((e.clientX - rect.left) / rect.width - 0.5);
+    y.set((e.clientY - rect.top) / rect.height - 0.5);
+  };
+
+  const handleMouseLeave = () => { x.set(0); y.set(0); };
 
   return (
-    <section
-      id="productos"
-      className={
-        "py-16 sm:py-24 lg:py-32 px-4 bg-gradient-to-b from-white to-stone-50 relative overflow-hidden transition-opacity duration-1000 " +
-        (isVisible ? "section-visible" : "section-enter")
-      }
+    <div
+      ref={ref}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{ perspective: "900px" }}
+      className={className}
     >
-      <div
-        className="absolute top-20 right-10 w-96 h-96 bg-green-200 rounded-full filter blur-3xl opacity-20 anim-float"
-        aria-hidden="true"
-      />
-      <div
-        className="absolute bottom-20 left-10 w-96 h-96 bg-amber-200 rounded-full filter blur-3xl opacity-20 anim-float"
-        style={{ animationDelay: "1.5s" }}
-        aria-hidden="true"
-      />
+      <motion.div
+        style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+        transition={{ type: "spring", stiffness: 200, damping: 25 }}
+        className="w-full h-full"
+      >
+        {children}
+      </motion.div>
+    </div>
+  );
+};
 
-      <div className="max-w-6xl mx-auto relative z-10">
-        <header
-          className={
-            "text-center mb-12 sm:mb-20 lg:mb-24 " + (isVisible ? "anim-slide-down" : "opacity-0")
-          }
-        >
-          <h2 className="font-display text-4xl sm:text-6xl md:text-8xl font-bold text-gray-900 mb-6 sm:mb-8">
-            Nuestros Productos
-          </h2>
-          <div className="flex items-center justify-center space-x-4 mb-4 sm:mb-6">
-            <div className="h-1 w-32 bg-gradient-to-r from-transparent via-green-600 to-transparent" />
-          </div>
-          <p className="font-body text-base sm:text-xl md:text-2xl text-gray-600 font-light">
-            Café de especialidad Geisha — directo de Jaltenango, Chiapas
-          </p>
-        </header>
+/* ── FadeSlide — slides in from a direction ──────────── */
+const FadeSlide = ({ children, delay = 0, fromX = 0, className = "" }) => {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-60px" });
+  return (
+    <motion.div
+      ref={ref}
+      className={className}
+      initial={{ opacity: 0, x: fromX, y: fromX === 0 ? 28 : 0 }}
+      animate={inView ? { opacity: 1, x: 0, y: 0 } : {}}
+      transition={{ duration: 0.9, delay, ease: [0.22, 1, 0.36, 1] }}
+    >
+      {children}
+    </motion.div>
+  );
+};
 
-        <div className="flex flex-col gap-10 sm:gap-16 lg:gap-20">
-          {productos.map((producto) => {
-            const IconComponent = producto.icon;
+/* ── Animating spec row ──────────────────────────────── */
+const SpecRow = ({ label, val, delay, inView }) => (
+  <motion.div
+    className="flex items-baseline gap-4 border-b border-white/[0.06] pb-3"
+    initial={{ opacity: 0, x: 18 }}
+    animate={inView ? { opacity: 1, x: 0 } : {}}
+    transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
+  >
+    <span className="font-heading text-xs tracking-[0.2em] uppercase text-white/25 w-20 flex-shrink-0">
+      {label}
+    </span>
+    <span className="font-body text-white/60 text-sm">{val}</span>
+  </motion.div>
+);
 
-            return (
-              <article
-                key={producto.id}
-                className={
-                  "group relative bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all overflow-hidden border-2 border-gray-100 hover:border-green-500 " +
-                  (isVisible ? "anim-slide-up" : "opacity-0")
-                }
-                style={{ animationDelay: producto.delay }}
-              >
-                <div className="flex flex-col lg:flex-row min-h-0 lg:min-h-[520px]">
-                  {/* Carousel — left side on desktop */}
-                  <div className="relative w-full lg:w-[45%] h-56 sm:h-72 lg:h-auto flex-shrink-0 overflow-hidden">
-                    <Carousel
-                      imagenes={producto.imagenes}
-                      nombre={producto.name}
-                      IconComponent={IconComponent}
-                    />
-                    {/* Overlay gradient fading into card on desktop */}
-                    <div className="hidden lg:block absolute inset-y-0 right-0 w-16 bg-gradient-to-r from-transparent to-white z-20" />
-                  </div>
+/* ── Main section ────────────────────────────────────── */
+const Productos = () => {
+  const titleRef = useRef(null);
+  const titleInView = useInView(titleRef, { once: true, margin: "-60px" });
 
-                  {/* Info — right side */}
-                  <div className="flex flex-col justify-between p-5 sm:p-8 lg:p-12 flex-1">
-                    {/* Header */}
-                    <div>
-                      <p className="font-body text-xs sm:text-sm font-semibold tracking-widest text-green-600 uppercase mb-2">
-                        {producto.tipo}
-                      </p>
-                      <h3 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-1">
-                        {producto.name}
-                      </h3>
-                      <p className="font-heading text-base sm:text-xl text-amber-700 font-semibold mb-4 sm:mb-5">
-                        {producto.subtitle}
-                      </p>
+  return (
+    <section id="productos" className="bg-[#0d0d0d] py-24 sm:py-36 px-6 sm:px-10">
+      <div className="max-w-6xl mx-auto">
 
-                      <p className="font-body text-gray-600 text-sm sm:text-base lg:text-lg leading-relaxed mb-5 sm:mb-8">
-                        {producto.descripcion}
-                      </p>
-
-                      {/* Details grid */}
-                      <div className="grid grid-cols-2 gap-2 sm:gap-3 mb-5 sm:mb-8">
-                        <div className="bg-stone-50 rounded-xl px-4 py-3">
-                          <p className="text-xs text-gray-400 uppercase tracking-wide mb-1">Calidad</p>
-                          <p className="text-sm font-semibold text-gray-800">{producto.calidad}</p>
-                        </div>
-                        <div className="bg-stone-50 rounded-xl px-4 py-3">
-                          <p className="text-xs text-gray-400 uppercase tracking-wide mb-1">Variedad</p>
-                          <p className="text-sm font-semibold text-gray-800">{producto.variedad}</p>
-                        </div>
-                        <div className="bg-stone-50 rounded-xl px-4 py-3">
-                          <p className="text-xs text-gray-400 uppercase tracking-wide mb-1">Contenido</p>
-                          <p className="text-sm font-semibold text-gray-800">{producto.peso}</p>
-                        </div>
-                        <div className="bg-green-50 rounded-xl px-4 py-3 border border-green-200">
-                          <p className="text-xs text-green-600 uppercase tracking-wide mb-1">Precio</p>
-                          <p className="text-lg font-bold text-green-700">{producto.precio}</p>
-                        </div>
-                      </div>
-
-                      {/* Features list */}
-                      <ul className="space-y-1.5 sm:space-y-2 mb-5 sm:mb-8" aria-label={"Características de " + producto.name}>
-                        {producto.features.map((feature, j) => (
-                          <li key={j} className="flex items-center space-x-3 text-gray-700">
-                            <span
-                              className="w-2 h-2 rounded-full bg-green-600 flex-shrink-0"
-                              aria-hidden="true"
-                            />
-                            <span className="font-body text-base">{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    {/* CTA Button */}
-                    <button
-                      onClick={() =>
-                        sendWhatsAppMessage(
-                          producto.name + " (" + producto.tipo + ")"
-                        )
-                      }
-                      className="w-full py-5 rounded-full font-heading font-bold text-lg transition-all transform hover:scale-105 shadow-xl hover:shadow-2xl flex items-center justify-center space-x-3 bg-green-600 hover:bg-green-700 text-white"
-                      aria-label={"Ordenar " + producto.name + " por WhatsApp"}
-                    >
-                      <MessageCircle className="w-6 h-6" aria-hidden="true" />
-                      <span>Ordenar por WhatsApp</span>
-                    </button>
-                  </div>
-                </div>
-              </article>
-            );
-          })}
+        {/* Header */}
+        <div ref={titleRef} className="mb-16 sm:mb-20" style={{ perspective: "800px" }}>
+          <motion.p
+            className="font-heading text-xs sm:text-[13px] tracking-[0.35em] text-[#c9a96e] uppercase mb-4"
+            initial={{ opacity: 0, y: 16 }}
+            animate={titleInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          >
+            Productos
+          </motion.p>
+          <motion.h2
+            className="font-display text-4xl sm:text-5xl md:text-6xl font-bold text-white"
+            initial={{ opacity: 0, y: 40, rotateX: -12 }}
+            animate={titleInView ? { opacity: 1, y: 0, rotateX: 0 } : {}}
+            transition={{ duration: 1, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            style={{ transformStyle: "preserve-3d" }}
+          >
+            Nuestros Cafés
+          </motion.h2>
         </div>
+
+        {productos.map((producto, idx) => {
+          const IconComponent = producto.icon;
+          const isReversed = idx % 2 === 1;
+
+          return (
+            <ProductBlock
+              key={producto.id}
+              producto={producto}
+              idx={idx}
+              isReversed={isReversed}
+              IconComponent={IconComponent}
+            />
+          );
+        })}
+
+        <div className="h-px bg-white/[0.06]" />
       </div>
     </section>
+  );
+};
+
+/* ── Product block — needs its own component for inView ref ── */
+const ProductBlock = ({ producto, idx, isReversed, IconComponent }) => {
+  const blockRef = useRef(null);
+  const inView = useInView(blockRef, { once: true, margin: "-80px" });
+
+  const specs = [
+    ["Calidad", producto.calidad],
+    ["Variedad", producto.variedad],
+    ["Contenido", producto.peso],
+  ];
+
+  return (
+    <div>
+      {/* Animated divider line */}
+      <motion.div
+        className="h-px bg-white/[0.06] mb-12 sm:mb-16"
+        initial={{ scaleX: 0 }}
+        animate={inView ? { scaleX: 1 } : {}}
+        style={{ originX: 0 }}
+        transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+      />
+
+      <FadeSlide className="mb-10 sm:mb-12">
+        <p className="font-heading text-xs tracking-[0.3em] text-white/20 uppercase">
+          {String(idx + 1).padStart(2, "0")} /{" "}
+          {String(productos.length).padStart(2, "0")}
+        </p>
+      </FadeSlide>
+
+      <div
+        ref={blockRef}
+        className={
+          "flex flex-col gap-10 sm:gap-14 mb-20 sm:mb-32 " +
+          (isReversed ? "lg:flex-row-reverse" : "lg:flex-row")
+        }
+      >
+        {/* ── Carousel with 3D tilt ── */}
+        <motion.div
+          className="w-full lg:w-[52%] flex-shrink-0"
+          initial={{ opacity: 0, x: isReversed ? 60 : -60, rotateY: isReversed ? -12 : 12 }}
+          animate={inView ? { opacity: 1, x: 0, rotateY: 0 } : {}}
+          transition={{ duration: 1, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
+          style={{ transformPerspective: 900 }}
+        >
+          <TiltCard className="relative w-full aspect-square sm:aspect-[4/3] lg:aspect-auto lg:h-[500px]">
+            <Carousel
+              imagenes={producto.imagenes}
+              nombre={producto.name}
+              IconComponent={IconComponent}
+            />
+            {/* Reflection / depth shadow */}
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background: "linear-gradient(135deg, rgba(201,169,110,0.04) 0%, transparent 60%)",
+                transform: "translateZ(1px)",
+              }}
+            />
+          </TiltCard>
+        </motion.div>
+
+        {/* ── Product info ── */}
+        <div className="flex flex-col justify-between py-0 sm:py-4 lg:py-8 flex-1 min-w-0">
+          <div>
+            <FadeSlide delay={0.12} fromX={isReversed ? -28 : 28}>
+              <p className="font-heading text-xs tracking-[0.3em] text-[#c9a96e] uppercase mb-3">
+                {producto.tipo}
+              </p>
+              <h3
+                className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-2 leading-tight"
+                style={{ perspective: "600px" }}
+              >
+                <motion.span
+                  style={{ display: "block", transformStyle: "preserve-3d" }}
+                  initial={{ opacity: 0, rotateX: -20, y: 20 }}
+                  animate={inView ? { opacity: 1, rotateX: 0, y: 0 } : {}}
+                  transition={{ duration: 0.9, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  {producto.name}
+                </motion.span>
+              </h3>
+              <p className="font-body text-white/30 text-sm mb-8 sm:mb-10">
+                {producto.subtitle}
+              </p>
+            </FadeSlide>
+
+            <FadeSlide delay={0.22} fromX={isReversed ? -20 : 20}>
+              <p className="font-body text-white/55 text-sm sm:text-base leading-relaxed mb-8 sm:mb-10 max-w-md">
+                {producto.descripcion}
+              </p>
+            </FadeSlide>
+
+            {/* Spec rows */}
+            <motion.div
+              className="space-y-3 border-t border-white/[0.06] pt-6 mb-10 sm:mb-12"
+              initial={{ opacity: 0 }}
+              animate={inView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.4, delay: 0.28 }}
+            >
+              {specs.map(([label, val], si) => (
+                <SpecRow
+                  key={label}
+                  label={label}
+                  val={val}
+                  delay={0.3 + si * 0.07}
+                  inView={inView}
+                />
+              ))}
+            </motion.div>
+          </div>
+
+          {/* Price + CTA */}
+          <FadeSlide delay={0.42} fromX={isReversed ? -20 : 20}>
+            <motion.p
+              className="font-display text-3xl sm:text-4xl font-bold text-[#c9a96e] mb-5"
+              whileHover={{ textShadow: "0 0 30px rgba(201,169,110,0.6)" }}
+            >
+              {producto.precio}
+            </motion.p>
+            <motion.button
+              onClick={() =>
+                sendWhatsAppMessage(producto.name + " (" + producto.tipo + ")")
+              }
+              whileHover={{
+                backgroundColor: "#c9a96e",
+                color: "#000",
+                boxShadow: "0 0 40px rgba(201,169,110,0.35)",
+              }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ duration: 0.25 }}
+              className="flex items-center justify-center gap-3 w-full sm:w-auto px-10 py-4 border border-[#c9a96e]/50 text-[#c9a96e] font-heading text-[10px] tracking-[0.25em] uppercase"
+              aria-label={"Ordenar " + producto.name + " por WhatsApp"}
+            >
+              <MessageCircle className="w-4 h-4" />
+              Ordenar por WhatsApp
+            </motion.button>
+          </FadeSlide>
+        </div>
+      </div>
+    </div>
   );
 };
 

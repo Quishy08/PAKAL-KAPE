@@ -1,72 +1,53 @@
-import { Star } from "lucide-react";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 
-const Diferenciador = ({ visibleSections }) => {
-  const isVisible = visibleSections.historia;
-
+const FadeUp = ({ children, delay = 0, className = "" }) => {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-60px" });
   return (
-    <section
-      className={
-        "py-16 sm:py-24 lg:py-32 px-4 bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white relative overflow-hidden transition-opacity duration-1000 " +
-        (isVisible ? "section-visible" : "section-enter")
-      }
+    <motion.div
+      ref={ref}
+      className={className}
+      initial={{ opacity: 0, y: 32 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.85, delay, ease: [0.22, 1, 0.36, 1] }}
     >
-      <div className="absolute inset-0 opacity-5" aria-hidden="true">
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute anim-float"
-            style={{
-              left: Math.random() * 100 + "%",
-              top: Math.random() * 100 + "%",
-              animationDelay: Math.random() * 3 + "s",
-            }}
-          >
-            <Star className="w-4 h-4 text-white" />
-          </div>
-        ))}
-      </div>
-
-      <div
-        className={
-          "max-w-6xl mx-auto text-center relative z-10 " +
-          (isVisible ? "anim-scale" : "opacity-0")
-        }
-      >
-        <h2 className="font-display text-3xl sm:text-5xl md:text-7xl font-bold mb-8 sm:mb-16">
-          ¿Qué Hace Este Café <span className="text-green-400">Diferente?</span>
-        </h2>
-        <div className="relative">
-          <div
-            className="absolute -inset-8 bg-gradient-to-r from-green-600/20 via-amber-500/20 to-green-600/20 rounded-full filter blur-3xl"
-            aria-hidden="true"
-          />
-          <p className="relative font-body text-base sm:text-xl md:text-3xl leading-relaxed px-4 sm:px-8 text-gray-100">
-            Nuestro café es una{" "}
-            <span className="text-green-400 font-bold">
-              expresión auténtica
-            </span>
-            , ya que cuidamos y supervisamos minuciosamente cada etapa del
-            proceso del grano, desde el cultivo de los cerezos hasta llegar a tu
-            taza, garantizando así la expresión auténtica de cada una de sus
-            identidades.
-          </p>
-        </div>
-        <div
-          className="mt-12 flex justify-center space-x-3"
-          role="img"
-          aria-label="5 estrellas"
-        >
-          {[...Array(5)].map((_, i) => (
-            <Star
-              key={i}
-              className="w-10 h-10 text-green-500 fill-green-500 anim-pulse"
-              style={{ animationDelay: i * 0.15 + "s" }}
-            />
-          ))}
-        </div>
-      </div>
-    </section>
+      {children}
+    </motion.div>
   );
 };
+
+const Diferenciador = () => (
+  <section className="bg-[#080808] py-24 sm:py-36 px-6 sm:px-10">
+    <div className="max-w-4xl mx-auto text-center">
+      <FadeUp>
+        <p className="font-heading text-xs sm:text-[13px] tracking-[0.35em] text-[#c9a96e] uppercase mb-10 sm:mb-14">
+          Lo que nos diferencia
+        </p>
+      </FadeUp>
+
+      <FadeUp delay={0.08}>
+        <p className="font-display text-3xl sm:text-4xl md:text-5xl text-white leading-snug mb-10 sm:mb-12">
+          Cuidamos y supervisamos minuciosamente cada etapa del proceso del
+          grano,{" "}
+          <span className="text-[#c9a96e]">
+            desde el cultivo de los cerezos hasta llegar a tu taza
+          </span>
+          , garantizando la expresión auténtica de su identidad.
+        </p>
+      </FadeUp>
+
+      <FadeUp delay={0.16}>
+        <div className="flex items-center justify-center gap-5">
+          <div className="h-px w-8 bg-[#c9a96e]/30" />
+          <p className="font-heading text-xs tracking-[0.3em] text-white/20 uppercase">
+            De la finca · A tu taza
+          </p>
+          <div className="h-px w-8 bg-[#c9a96e]/30" />
+        </div>
+      </FadeUp>
+    </div>
+  </section>
+);
 
 export default Diferenciador;

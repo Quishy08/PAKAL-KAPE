@@ -1,67 +1,41 @@
-import { Star } from "lucide-react";
 import { navItems, brandInfo } from "../../data/content";
 import logo from "../../assets/logo_pakal.jpeg";
 
 const Footer = ({ scrollTo }) => {
-  const currentYear = new Date().getFullYear();
-
+  const year = new Date().getFullYear();
   return (
-    <footer className="bg-black text-white py-12 px-4 border-t border-gray-800">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center space-y-8">
+    <footer className="bg-black border-t border-white/5 py-10 sm:py-12 px-6 sm:px-10">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
           <button
             onClick={() => scrollTo("inicio")}
-            className="flex items-center justify-center space-x-3 group mx-auto"
+            className="flex items-center gap-3 group"
             aria-label="Ir a inicio"
           >
             <img
               src={logo}
-              alt="Pakal Kape Logo"
-              className="h-16 w-auto group-hover:scale-110 transition-transform"
+              alt="Pakal Kape"
+              className="h-7 w-auto rounded-full opacity-60 group-hover:opacity-100 transition-opacity"
             />
-            <div className="text-left">
-              <span className="text-3xl font-bold block group-hover:text-green-400 transition-colors font-heading">
-                {brandInfo.name}
-              </span>
-              <span className="text-sm text-green-400 font-heading">
-                {brandInfo.tagline}
-              </span>
-            </div>
+            <span className="font-heading text-xs tracking-[0.25em] uppercase text-white/50 group-hover:text-white/80 transition-colors">
+              {brandInfo.name}
+            </span>
           </button>
 
-          <div
-            className="flex justify-center space-x-2"
-            role="img"
-            aria-label="5 estrellas"
-          >
-            {[...Array(5)].map((_, i) => (
-              <Star key={i} className="w-6 h-6 text-green-500 fill-green-500" />
-            ))}
-          </div>
-
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto font-body">
-            {brandInfo.description}
-          </p>
-
-          <nav
-            className="flex flex-wrap justify-center gap-x-6 gap-y-3 sm:gap-x-8 text-gray-400 font-heading"
-            aria-label="Enlaces de navegación"
-          >
+          <nav className="flex flex-wrap gap-x-7 gap-y-2" aria-label="Footer navigation">
             {navItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => scrollTo(item.id)}
-                className="hover:text-green-400 transition-colors text-lg"
+                className="font-heading text-xs tracking-[0.2em] uppercase text-white/25 hover:text-white/60 transition-colors"
               >
                 {item.label}
               </button>
             ))}
           </nav>
 
-          <div className="h-px w-full max-w-lg mx-auto bg-gradient-to-r from-transparent via-gray-700 to-transparent" />
-
-          <p className="text-gray-500 font-body">
-            © {currentYear} Pakal Kape. Todos los derechos reservados.
+          <p className="font-body text-xs text-white/15">
+            © {year} ESPORO &amp; Pakal Kape · Todos los derechos reservados
           </p>
         </div>
       </div>

@@ -1,135 +1,152 @@
-import {
-  MessageCircle,
-  Mountain,
-  Sparkles,
-  Mail,
-  Instagram,
-  Facebook,
-} from "lucide-react";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { MessageCircle, Mail } from "lucide-react";
 import { contactInfo } from "../../data/content";
 import { sendWhatsAppMessage } from "../../utils/whatsapp";
 
-const Contacto = ({ visibleSections }) => {
-  const isVisible = visibleSections.contacto;
+const IconInstagram = ({ className }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+    <circle cx="12" cy="12" r="4" />
+    <circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" stroke="none" />
+  </svg>
+);
 
+const IconFacebook = ({ className }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+  </svg>
+);
+
+const FadeUp = ({ children, delay = 0, className = "" }) => {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-60px" });
   return (
-    <section
-      id="contacto"
-      className={
-        "py-16 sm:py-24 lg:py-32 px-4 bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white relative overflow-hidden transition-opacity duration-1000 " +
-        (isVisible ? "section-visible" : "section-enter")
-      }
+    <motion.div
+      ref={ref}
+      className={className}
+      initial={{ opacity: 0, y: 32 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.85, delay, ease: [0.22, 1, 0.36, 1] }}
     >
-      <div
-        className="absolute inset-0 opacity-5 anim-rotate"
-        aria-hidden="true"
-      >
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(circle at 50% 50%, white 1px, transparent 1px)",
-            backgroundSize: "50px 50px",
-          }}
-        />
-      </div>
-
-      <div
-        className={
-          "max-w-5xl mx-auto text-center relative z-10 " +
-          (isVisible ? "anim-scale" : "opacity-0")
-        }
-      >
-        <header className="mb-16">
-          <h2 className="font-display text-4xl sm:text-6xl md:text-8xl font-bold mb-8 sm:mb-12">
-            Contáctanos
-          </h2>
-          <div className="flex items-center justify-center space-x-4 mb-16">
-            <div className="h-1 w-32 bg-gradient-to-r from-transparent via-green-500 to-transparent" />
-          </div>
-        </header>
-
-        <div className="space-y-12">
-          <p className="font-body text-xl sm:text-3xl md:text-4xl font-light leading-relaxed">
-            ¿Interesado en nuestros productos de café de especialidad?
-          </p>
-          <p className="font-body text-base sm:text-xl md:text-2xl text-green-400 font-light">
-            Contáctanos para más información sobre nuestros cafés Geisha
-          </p>
-
-          <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto mt-12">
-            <button
-              onClick={() =>
-                sendWhatsAppMessage(
-                  "información sobre productos",
-                  contactInfo.phoneNumber,
-                )
-              }
-              className="group bg-green-600 hover:bg-green-700 text-white px-6 sm:px-8 py-4 sm:py-6 rounded-2xl text-base sm:text-lg font-bold transition-all transform hover:scale-105 shadow-2xl flex items-center justify-center space-x-3 font-heading"
-            >
-              <MessageCircle className="w-7 h-7 group-hover:rotate-12 transition-transform" />
-              <div className="text-left">
-                <div className="text-sm opacity-90">WhatsApp</div>
-                <div className="text-lg">{contactInfo.phoneNumber}</div>
-              </div>
-            </button>
-
-            <a
-              href={"mailto:" + contactInfo.email}
-              className="group bg-amber-700 hover:bg-amber-800 text-white px-6 sm:px-8 py-4 sm:py-6 rounded-2xl text-base sm:text-lg font-bold transition-all transform hover:scale-105 shadow-2xl flex items-center justify-center space-x-3 font-heading min-w-0"
-            >
-              <Mail className="w-7 h-7 group-hover:rotate-12 transition-transform" />
-              <div className="text-left">
-                <div className="text-sm opacity-90">Email</div>
-                <div className="text-sm sm:text-lg break-all">{contactInfo.email}</div>
-              </div>
-            </a>
-          </div>
-
-          <div className="mt-16 pt-12 border-t border-white/20">
-            <p className="font-body text-xl text-green-400 mb-6">
-              Síguenos en redes sociales
-            </p>
-            <div className="flex justify-center space-x-6">
-              <a
-                href={contactInfo.social.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group bg-white/10 hover:bg-gradient-to-br hover:from-purple-600 hover:to-pink-600 p-4 rounded-full transition-all transform hover:scale-110"
-              >
-                <Instagram className="w-8 h-8" />
-              </a>
-              <a
-                href={contactInfo.social.facebook}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group bg-white/10 hover:bg-blue-600 p-4 rounded-full transition-all transform hover:scale-110"
-              >
-                <Facebook className="w-8 h-8" />
-              </a>
-            </div>
-          </div>
-
-          <div className="mt-20 pt-12 border-t border-white/20 space-y-6">
-            <div className="flex items-center justify-center space-x-3 mb-4">
-              <Sparkles className="w-6 h-6 text-green-500" />
-              <p className="font-heading text-green-500 text-2xl font-semibold">
-                Fundadores
-              </p>
-              <Sparkles className="w-6 h-6 text-green-500" />
-            </div>
-            <p className="font-heading text-xl sm:text-3xl font-bold">
-              {contactInfo.fundadores}
-            </p>
-            <p className="font-body text-xl text-gray-300 flex items-center justify-center space-x-2">
-              <Mountain className="w-5 h-5" />
-              <span>{contactInfo.location}</span>
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
+      {children}
+    </motion.div>
   );
 };
+
+const Contacto = () => (
+  <section id="contacto" className="bg-[#080808] py-24 sm:py-36 px-6 sm:px-10">
+    <div className="max-w-5xl mx-auto">
+      <FadeUp>
+        <p className="font-heading text-xs sm:text-[13px] tracking-[0.35em] text-[#c9a96e] uppercase mb-5">
+          Contacto
+        </p>
+        <h2 className="font-display text-5xl sm:text-6xl md:text-7xl font-bold text-white mb-5">
+          Hablemos
+        </h2>
+        <p className="font-body font-light text-sm sm:text-base text-white/35 max-w-sm leading-relaxed mb-16 sm:mb-20">
+          ¿Interesado en nuestros productos? Contáctanos directamente y con
+          gusto te atendemos.
+        </p>
+      </FadeUp>
+
+      {/* Contact cards */}
+      <div className="grid sm:grid-cols-2 gap-3 mb-16 sm:mb-20">
+        <FadeUp delay={0.08}>
+          <button
+            onClick={() =>
+              sendWhatsAppMessage(
+                "información sobre productos",
+                contactInfo.phoneNumber
+              )
+            }
+            className="group w-full p-7 sm:p-9 border border-white/8 hover:border-[#c9a96e]/40 text-left transition-all duration-400"
+          >
+            <MessageCircle className="w-5 h-5 text-[#c9a96e] mb-5" />
+            <p className="font-heading text-xs tracking-[0.25em] text-white/25 uppercase mb-2">
+              WhatsApp
+            </p>
+            <p className="font-body text-white text-base sm:text-lg mb-5">
+              {contactInfo.phoneNumber}
+            </p>
+            <p className="font-heading text-xs tracking-widest text-[#c9a96e] uppercase group-hover:opacity-80 transition-opacity">
+              Escribir mensaje →
+            </p>
+          </button>
+        </FadeUp>
+
+        <FadeUp delay={0.13}>
+          <a
+            href={"mailto:" + contactInfo.email}
+            className="group block w-full p-7 sm:p-9 border border-white/8 hover:border-[#c9a96e]/40 text-left transition-all duration-400"
+          >
+            <Mail className="w-5 h-5 text-[#c9a96e] mb-5" />
+            <p className="font-heading text-xs tracking-[0.25em] text-white/25 uppercase mb-2">
+              Email
+            </p>
+            <p className="font-body text-white text-sm sm:text-base break-all mb-5">
+              {contactInfo.email}
+            </p>
+            <p className="font-heading text-xs tracking-widest text-[#c9a96e] uppercase group-hover:opacity-80 transition-opacity">
+              Enviar correo →
+            </p>
+          </a>
+        </FadeUp>
+      </div>
+
+      <div className="h-px bg-white/[0.06] mb-12 sm:mb-16" />
+
+      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-8">
+        <FadeUp delay={0.1}>
+          <p className="font-heading text-xs tracking-[0.3em] text-white/25 uppercase mb-4">
+            Síguenos
+          </p>
+          <div className="flex gap-5">
+            <motion.a
+              href={contactInfo.social.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram de Pakal Kape"
+              whileHover={{ scale: 1.1, color: "#c9a96e" }}
+              whileTap={{ scale: 0.92 }}
+              transition={{ type: "spring", stiffness: 400, damping: 15 }}
+              className="flex items-center gap-3 px-5 py-3 border border-white/8 hover:border-[#c9a96e]/35 text-white/40 hover:text-[#c9a96e] transition-all duration-300"
+            >
+              <IconInstagram className="w-5 h-5 flex-shrink-0" />
+              <span className="font-heading text-xs tracking-[0.2em] uppercase">Instagram</span>
+            </motion.a>
+            <motion.a
+              href={contactInfo.social.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook de Pakal Kape"
+              whileHover={{ scale: 1.1, color: "#c9a96e" }}
+              whileTap={{ scale: 0.92 }}
+              transition={{ type: "spring", stiffness: 400, damping: 15 }}
+              className="flex items-center gap-3 px-5 py-3 border border-white/8 hover:border-[#c9a96e]/35 text-white/40 hover:text-[#c9a96e] transition-all duration-300"
+            >
+              <IconFacebook className="w-5 h-5 flex-shrink-0" />
+              <span className="font-heading text-xs tracking-[0.2em] uppercase">Facebook</span>
+            </motion.a>
+          </div>
+        </FadeUp>
+
+        <FadeUp delay={0.15}>
+          <div className="sm:text-right">
+            <p className="font-heading text-xs tracking-[0.3em] text-white/20 uppercase mb-2">
+              Fundadores
+            </p>
+            <p className="font-body text-white/55 text-sm">
+              {contactInfo.fundadores}
+            </p>
+            <p className="font-body text-white/20 text-xs mt-1">
+              {contactInfo.location}
+            </p>
+          </div>
+        </FadeUp>
+      </div>
+    </div>
+  </section>
+);
 
 export default Contacto;

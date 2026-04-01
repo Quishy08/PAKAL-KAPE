@@ -1,170 +1,99 @@
-import { Star, Coffee } from "lucide-react";
-import { caracteristicas, fundadores } from "../../data/content";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import cafeImage from "../../assets/finca_mejorada.jpg";
 
-const Historia = ({ visibleSections }) => {
-  const isVisible = visibleSections.historia;
-
+const FadeUp = ({ children, delay = 0, className = "" }) => {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-60px" });
   return (
-    <section
-      id="historia"
-      className={
-        "py-16 sm:py-24 lg:py-32 px-4 bg-gradient-to-b from-stone-50 to-white relative overflow-hidden transition-opacity duration-1000 " +
-        (isVisible ? "section-visible" : "section-enter")
-      }
+    <motion.div
+      ref={ref}
+      className={className}
+      initial={{ opacity: 0, y: 32 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.85, delay, ease: [0.22, 1, 0.36, 1] }}
     >
-      <div
-        className="absolute top-0 right-0 w-[600px] h-[600px] bg-green-100 rounded-full filter blur-3xl opacity-30 anim-pulse"
-        aria-hidden="true"
-      />
-      <div
-        className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-amber-100 rounded-full filter blur-3xl opacity-30 anim-pulse"
-        style={{ animationDelay: "1s" }}
-        aria-hidden="true"
-      />
-
-      <div className="max-w-7xl mx-auto relative z-10">
-        <header
-          className={
-            "text-center mb-20 " + (isVisible ? "anim-slide-down" : "opacity-0")
-          }
-        >
-          <h2 className="font-display text-4xl sm:text-6xl md:text-8xl font-bold text-gray-900 mb-6 sm:mb-8">
-            Nuestra Historia
-          </h2>
-          <div className="flex items-center justify-center space-x-4 mb-6">
-            <div className="h-1 w-32 bg-gradient-to-r from-transparent via-green-600 to-transparent" />
-          </div>
-        </header>
-
-        <div className="max-w-5xl mx-auto space-y-20">
-          <article
-            className={'${isVisible ? "anim-slide-up" : "opacity-0"}'}
-            style={{ animationDelay: "0.2s" }}
-          >
-            <p className="font-body text-lg sm:text-2xl md:text-3xl text-gray-700 leading-relaxed text-center mb-8 sm:mb-12">
-              Café Pakal Kape nace de la idea de poder crear una marca de café
-              en la cual se llegue a{" "}
-              <strong className="text-green-700 font-bold">
-                dignificar y valorar el trabajo de nuestros productores
-              </strong>
-              , ya que ellos son la base para poder obtener el mejor café con la
-              mejor calidad.
-            </p>
-
-            <figure className="relative w-full h-[400px] md:h-[600px] rounded-3xl overflow-hidden shadow-2xl group border-4 border-green-600">
-              <img
-                src={cafeImage}
-                alt="Plantación de café Pakal Kape en las montañas de Chiapas"
-                className="w-full h-full object-cover"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            </figure>
-          </article>
-
-          <div
-            className={'${isVisible ? "anim-slide-right" : "opacity-0"}'}
-            style={{ animationDelay: "0.4s" }}
-          >
-            <p className="font-body text-lg sm:text-2xl md:text-3xl text-gray-700 leading-relaxed">
-              Mediante los diversos procesos de secado y fermentación que
-              realizan, hacen que cada grano de café obtenga un{" "}
-              <strong className="text-amber-700 font-bold">
-                sabor excepcional y único
-              </strong>
-              . Es por eso que en Pakal Kape, como nuestro nombre lo indica, nos
-              dedicamos enteramente a proteger y salvaguardar la integridad y
-              calidad de nuestro producto así como la de nuestros productores.
-            </p>
-          </div>
-
-          <div
-            className={
-              "grid md:grid-cols-4 gap-8 mt-20 " +
-              (isVisible ? "anim-scale" : "opacity-0")
-            }
-            style={{ animationDelay: "0.6s" }}
-          >
-            {caracteristicas.map((item, i) => {
-              const IconComponent = item.icon;
-              return (
-                <article
-                  key={i}
-                  className="group text-center transform hover:scale-110 transition-all duration-500 bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl border-2 border-gray-200 hover:border-green-500"
-                >
-                  <div
-                    className={
-                      "w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:shadow-2xl transition-all " +
-                      item.bg
-                    }
-                  >
-                    <IconComponent
-                      className={
-                        "w-12 h-12 group-hover:scale-125 transition-transform " +
-                        item.color
-                      }
-                    />
-                  </div>
-                  <h3 className="font-heading text-xl font-bold text-gray-900 mb-2">
-                    {item.title}
-                  </h3>
-                  <p className="font-body text-gray-600">{item.desc}</p>
-                </article>
-              );
-            })}
-          </div>
-
-          <section
-            className={"mt-32 " + (isVisible ? "anim-slide-up" : "opacity-0")}
-            style={{ animationDelay: "1s" }}
-          >
-            <header className="text-center mb-16">
-              <h3 className="font-display text-3xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-4">
-                Fundadores
-              </h3>
-              <p className="font-body text-xl text-gray-600">
-                Visionarios del café de especialidad
-              </p>
-            </header>
-
-            <div className="grid md:grid-cols-2 gap-16 max-w-4xl mx-auto">
-              {fundadores.map((fundador, i) => (
-                <article
-                  key={i}
-                  className="group text-center bg-gradient-to-b from-green-50 to-white p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all"
-                >
-                  <figure className="relative w-36 h-36 sm:w-48 sm:h-48 md:w-64 md:h-64 mx-auto mb-6 rounded-full overflow-hidden shadow-2xl transform group-hover:scale-110 transition-all duration-500 ring-4 sm:ring-8 ring-green-500/50">
-                    <div className="w-full h-full bg-gradient-to-br from-gray-700 via-gray-800 to-gray-900 flex items-center justify-center">
-                      <Coffee className="w-20 h-20 text-white/40" />
-                    </div>
-                  </figure>
-                  <h4 className="font-heading text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
-                    {fundador.nombre}
-                  </h4>
-                  <p className="font-body text-green-700 text-lg font-semibold mb-3">
-                    {fundador.rol}
-                  </p>
-                  <div
-                    className="flex justify-center space-x-1"
-                    role="img"
-                    aria-label="5 estrellas"
-                  >
-                    {[...Array(5)].map((_, j) => (
-                      <Star
-                        key={j}
-                        className="w-5 h-5 text-green-600 fill-green-600"
-                      />
-                    ))}
-                  </div>
-                </article>
-              ))}
-            </div>
-          </section>
-        </div>
-      </div>
-    </section>
+      {children}
+    </motion.div>
   );
 };
+
+const stats = [
+  { value: "84", unit: "pts", label: "Specialty Coffee Association" },
+  { value: "1600–1900", unit: "msnm", label: "Altitud de cultivo" },
+  { value: "Geisha", unit: "", label: "Variedad exclusiva" },
+  { value: "100%", unit: "orgánico", label: "Certificado" },
+];
+
+const Historia = () => (
+  <section id="historia" className="bg-[#f5f2ec] py-24 sm:py-36 px-6 sm:px-10">
+    <div className="max-w-5xl mx-auto">
+      <FadeUp>
+        <p className="font-heading text-xs sm:text-[13px] tracking-[0.35em] text-[#c9a96e] uppercase mb-10 sm:mb-14">
+          Historia
+        </p>
+      </FadeUp>
+
+      <FadeUp delay={0.08}>
+        <p className="font-display text-3xl sm:text-4xl md:text-5xl text-[#1a1a1a] leading-snug mb-14 sm:mb-20 max-w-4xl">
+          Café Pakal Kape nace de la idea de crear una marca de café en la cual
+          se llegue a{" "}
+          <em className="not-italic text-[#8b6914]">
+            dignificar y valorar el trabajo de nuestros productores
+          </em>
+          , ya que ellos son la base para obtener el mejor café con la mejor
+          calidad.
+        </p>
+      </FadeUp>
+
+      {/* Full-bleed image */}
+      <FadeUp delay={0.12} className="mb-14 sm:mb-20">
+        <div className="w-full aspect-[16/9] sm:aspect-[21/9] rounded-xl overflow-hidden">
+          <img
+            src={cafeImage}
+            alt="Plantaciones de café Pakal Kape en las montañas de Chiapas"
+            className="w-full h-full object-cover"
+            loading="lazy"
+          />
+        </div>
+      </FadeUp>
+
+      {/* Stats */}
+      <FadeUp delay={0.08} className="mb-14 sm:mb-20">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-[#e0dbd3]">
+          {stats.map((stat, i) => (
+            <div key={i} className="bg-[#f5f2ec] p-6 sm:p-8">
+              <p className="font-display text-2xl sm:text-3xl font-bold text-[#1a1a1a] leading-tight">
+                {stat.value}
+                {stat.unit && (
+                  <span className="text-sm sm:text-base font-normal text-[#c9a96e] ml-1">
+                    {stat.unit}
+                  </span>
+                )}
+              </p>
+              <p className="font-body text-[11px] text-[#999] mt-2 leading-snug">
+                {stat.label}
+              </p>
+            </div>
+          ))}
+        </div>
+      </FadeUp>
+
+      {/* Second paragraph */}
+      <FadeUp delay={0.08}>
+        <p className="font-body text-base sm:text-lg md:text-xl text-[#555] leading-relaxed max-w-3xl">
+          Mediante los diversos procesos de secado y fermentación que realizan,
+          hacen que cada grano de café obtenga un{" "}
+          <strong className="text-[#1a1a1a] font-semibold">
+            sabor excepcional y único
+          </strong>
+          . En Pakal Kape nos dedicamos enteramente a proteger y salvaguardar la
+          integridad y calidad de nuestro producto, así como la de nuestros
+          productores.
+        </p>
+      </FadeUp>
+    </div>
+  </section>
+);
 
 export default Historia;
