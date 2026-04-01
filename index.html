@@ -1,18 +1,122 @@
 <!doctype html>
-<html lang="en">
+<!--
+  © 2024–2026 ESPORO & Pakal Kape. Todos los derechos reservados.
+  Este sitio web, su diseño, código fuente y contenido son propiedad exclusiva
+  de ESPORO y Pakal Kape. Queda estrictamente prohibida la reproducción,
+  distribución, scraping o uso no autorizado de cualquier parte de este sitio
+  sin el consentimiento previo y por escrito de los titulares.
+  Unauthorized use, copying, scraping, or redistribution is prohibited.
+-->
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/assets/pakal_svg-_iyL98x1.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Pakal Kape es una marca de café que se inspira en la cultura de Chiapas y en la riqueza de los sabores del café. Nuestro objetivo es ofrecer a nuestros clientes una experiencia única y auténtica al disfrutar de nuestro café, que es cultivado con cuidado y pasión por los agricultores locales. En Pakal Kape, creemos que el café es más que una bebida, es una forma de conectar con nuestras raíces y con la naturaleza. Por eso, nos esforzamos por ofrecer un producto de alta calidad que refleje la riqueza cultural y natural de nuestra región."
-    />
-    <title>Pakal Kape</title>
-    <script type="module" crossorigin src="/assets/index-CpqdpXl9.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-kBOmyc0M.css">
+
+    <!-- Primary SEO -->
+    <title>Pakal Kape | Café de Especialidad Geisha | Jaltenango, Chiapas</title>
+    <meta name="description" content="Pakal Kape ofrece café de especialidad 100% orgánico variedad Geisha con certificación Fair Trade, cultivado entre 1600–1900 msnm en Jaltenango, Chiapas, México. 84 puntos SCA. Café en grano tostado y molido." />
+    <meta name="keywords" content="café de especialidad, café geisha, café chiapas, café orgánico, jaltenango, café de altura, pakal kape, café mexico, café sca, café en grano, café molido, fair trade, café fair trade, comercio justo" />
+    <meta name="author" content="Pakal Kape" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://pakalkape.com" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://pakalkape.com" />
+    <meta property="og:title" content="Pakal Kape | Café de Especialidad Geisha | Jaltenango, Chiapas" />
+    <meta property="og:description" content="Café de especialidad 100% orgánico variedad Geisha, cultivado entre 1600–1900 msnm en las montañas de Chiapas, México. 84 puntos SCA." />
+    <meta property="og:image" content="https://pakalkape.com/og-image.jpg" />
+    <meta property="og:locale" content="es_MX" />
+    <meta property="og:site_name" content="Pakal Kape" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Pakal Kape | Café de Especialidad Geisha" />
+    <meta name="twitter:description" content="Café de especialidad 100% orgánico variedad Geisha de Jaltenango, Chiapas. 84 puntos SCA." />
+    <meta name="twitter:image" content="https://pakalkape.com/og-image.jpg" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Montserrat:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "LocalBusiness",
+          "@id": "https://pakalkape.com/#business",
+          "name": "Pakal Kape",
+          "description": "Café de especialidad 100% orgánico variedad Geisha con certificación Fair Trade, cultivado entre 1600–1900 msnm en Jaltenango, Chiapas, México.",
+          "hasCredential": "Fair Trade Certified",
+          "url": "https://pakalkape.com",
+          "telephone": "+522212764387",
+          "email": "contacto@pakalkape.com",
+          "priceRange": "$250–$265 MXN",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Jaltenango",
+            "addressRegion": "Chiapas",
+            "addressCountry": "MX"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": "15.8167",
+            "longitude": "-92.7167"
+          },
+          "sameAs": [
+            "https://instagram.com/pakalkape",
+            "https://facebook.com/pakalkape"
+          ],
+          "image": "https://pakalkape.com/og-image.jpg"
+        },
+        {
+          "@type": "Product",
+          "name": "YUUMIL BAK'AL — Café en Grano Tostado",
+          "description": "Café en grano tostado variedad Geisha, 500g. Calidad Europea de Exportación. 84 puntos SCA. Cultivado entre 1600–1900 msnm en Jaltenango, Chiapas.",
+          "brand": { "@type": "Brand", "name": "Pakal Kape" },
+          "offers": {
+            "@type": "Offer",
+            "price": "250",
+            "priceCurrency": "MXN",
+            "availability": "https://schema.org/InStock",
+            "seller": { "@id": "https://pakalkape.com/#business" }
+          }
+        },
+        {
+          "@type": "Product",
+          "name": "NIKTE 'KA'ANIL — Café Molido",
+          "description": "Café molido variedad Geisha, 500g. Calidad Europea de Exportación. 84 puntos SCA. Perfecto para cafetera tradicional, prensa francesa o eléctrica.",
+          "brand": { "@type": "Brand", "name": "Pakal Kape" },
+          "offers": {
+            "@type": "Offer",
+            "price": "265",
+            "priceCurrency": "MXN",
+            "availability": "https://schema.org/InStock",
+            "seller": { "@id": "https://pakalkape.com/#business" }
+          }
+        }
+      ]
+    }
+    </script>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WFJJVZCD');</script>
+    <!-- End Google Tag Manager -->
+    <script type="module" crossorigin src="/assets/index-B4EVXKVk.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-zAQlot1c.css">
   </head>
   <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WFJJVZCD"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <div id="root"></div>
   </body>
 </html>
